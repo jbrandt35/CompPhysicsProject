@@ -1,6 +1,6 @@
 #Class for Objects in N-body Simulator
 
-class bodies:
+class body:
     def __init__(self,name,mass,iposition,ivelocity):
         self.name = name
         self.mass = mass
