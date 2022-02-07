@@ -1,4 +1,5 @@
 import numpy as np
+from Equations import kinetic_energy
 
 #Class for Objects in N-body Simulator
 class Body:
@@ -9,7 +10,7 @@ class Body:
         self.velocity = ivelocity
         self.position_history = np.array([iposition])
         self.velocity_history = np.array([ivelocity])
-        self.kinetic_energy = (1/2) * self.mass * np.linalg.norm(ivelocity)**2
+        self.kinetic_energy = kinetic_energy(self)
 
     def __repr__(self):
         return str({"name":self.name, "mass":self.mass, "position":self.position, "velocity":self.velocity})
@@ -30,5 +31,5 @@ class Body:
     def update_velocity(self,new_velocity):
         self.velocity = new_velocity
         np.append(self.velocity_history, new_velocity)
-        self.kinetic_energy = (1/2) * self.mass * np.linalg.norm(new_velocity)**2
+        self.kinetic_energy = kinetic_energy(self)
     
