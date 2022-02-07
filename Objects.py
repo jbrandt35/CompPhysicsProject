@@ -13,7 +13,8 @@ class Body:
         self.kinetic_energy = kinetic_energy(self)
 
     def __repr__(self):
-        return str({"name":self.name, "mass":self.mass, "position":self.position, "velocity":self.velocity})
+        #return str({"name":self.name, "mass":self.mass, "position":self.position, "velocity":self.velocity})
+        return self.name
 
     def get_position(self):
         return self.position
