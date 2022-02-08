@@ -11,19 +11,22 @@ class Body:
         self.position_history = np.array([iposition])
         self.velocity_history = np.array([ivelocity])
         self.kinetic_energy = kinetic_energy(self)
+        self.net_force = np.zeros(3)
 
     def __repr__(self):
-        #return str({"name":self.name, "mass":self.mass, "position":self.position, "velocity":self.velocity})
         return self.name
 
-    def get_position(self):
-        return self.position
+    def __eq__(self, body1, body2):
+        return body1.name == body2.name
 
-    def get_velocity(self):
-        return self.velocity
+    def add_force(self, force):
+        self.net_force += force
 
-    def get_mass(self):
-        return self.mass
+    def get_acceleration(self):
+        return self.net_force/self.mass
+
+    def clear_force(self):
+        self.net_force = np.zeros(3)
 
     def update_position(self,new_position):
         self.position = new_position
