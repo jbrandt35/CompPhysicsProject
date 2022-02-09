@@ -6,8 +6,8 @@ class Body:
     def __init__(self,name,mass,iposition,ivelocity):
         self.name = name
         self.mass = mass
-        self.position = iposition
-        self.velocity = ivelocity
+        self.position = np.array(iposition)
+        self.velocity = np.array(ivelocity)
         self.position_history = np.array([iposition])
         self.velocity_history = np.array([ivelocity])
         self.kinetic_energy = kinetic_energy(self)
@@ -16,8 +16,8 @@ class Body:
     def __repr__(self):
         return self.name
 
-    def __eq__(self, body1, body2):
-        return body1.name == body2.name
+    def __eq__(self, other):
+        return self.name == other.name
 
     def add_force(self, force):
         self.net_force += force

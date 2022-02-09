@@ -16,9 +16,15 @@ def parse_objects(files):
         except:
             print(f"Can't load {file}.")
 
-        if data["mass"] == "<Find>" and data["name"] == "Earth":
-            print("Earth's mass not provided, pulling from Astropy")
-            data["mass"] = constants.M_earth.value
+        if data["mass"] == "<Find>":
+            if data["name"] == "Earth":
+                print("Earth's mass not provided, pulling from Astropy")
+                data["mass"] = constants.M_earth.value
+            elif data["name"] == "Sun":
+                print("Sun's mass not provided, pulling from Astropy")
+                data["mass"] = constants.M_sun.value
+
+
 
         body = Body(data["name"], data["mass"], data["iposition"], data["ivelocity"])
 
