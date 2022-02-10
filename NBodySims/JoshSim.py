@@ -9,14 +9,16 @@ def RunSim(objects, settings):
        update_forces(objects)
        update_position_and_velocity(objects, dt)
 
+       print(objects[0].position)
+
 
 def update_position_and_velocity(objects, dt):
     for object in objects:
-        dr = object.velocity * dt + (1/2)*object.get_acceleration() * dt**2
-        object.update_position(object.position + dr)
+        dr = object.velocity * dt + (1/2) * object.acceleration * dt**2
+        object.add_position(dr)
 
-        dv = object.get_acceleration() * dt
-        object.update_velocity(object.velocity + dv)
+        dv = object.acceleration * dt
+        object.add_velocity(dv)
 
 
 def update_forces(objects):

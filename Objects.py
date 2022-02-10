@@ -6,12 +6,13 @@ class Body:
     def __init__(self,name,mass,iposition,ivelocity):
         self.name = name
         self.mass = mass
-        self.position = np.array(iposition)
-        self.velocity = np.array(ivelocity)
+        self.position = np.array(iposition, float)
+        self.velocity = np.array(ivelocity, float)
         self.position_history = np.array([iposition])
         self.velocity_history = np.array([ivelocity])
         self.kinetic_energy = kinetic_energy(self)
-        self.net_force = np.zeros(3)
+        self.net_force = np.zeros(3, float)
+        self.acceleration = np.zeros(3, float)
 
     def __repr__(self):
         return self.name
@@ -21,19 +22,17 @@ class Body:
 
     def add_force(self, force):
         self.net_force += force
-
-    def get_acceleration(self):
-        return self.net_force/self.mass
+        self.acceleration = self.net_force / self.mass
 
     def clear_force(self):
-        self.net_force = np.zeros(3)
+        self.net_force = np.zeros(3, float)
 
-    def update_position(self,new_position):
-        self.position = new_position
-        np.append(self.position_history, new_position)
+    def add_position(self,new_position):
+        self.position += new_position
+        np.append(self.position_history, self.position)
 
-    def update_velocity(self,new_velocity):
-        self.velocity = new_velocity
-        np.append(self.velocity_history, new_velocity)
+    def add_velocity(self,new_velocity):
+        self.velocity += new_velocity
+        np.append(self.velocity_history, self.velocity)
         self.kinetic_energy = kinetic_energy(self)
     
