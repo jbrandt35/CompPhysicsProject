@@ -1,24 +1,43 @@
 from Equations import *
 from time import time
 
-def RunSim(objects, settings):
-   dt = settings["dt"]
-   start_time = time()
-   while time() - start_time < settings["Runtime"]:
-       clear_forces(objects)
-       update_forces(objects)
-       update_position_and_velocity(objects, dt)
+import matplotlib.pyplot as plt
 
-       print(objects[0].position)
+def RunSim(objects, settings):
+    dt = settings["dt"]
+    start_time = time()
+
+    dist = []
+    t = []
+    n=0
+
+    while time() - start_time < settings["Runtime"]:
+        clear_forces(objects)
+        update_forces(objects)
+        update_position_and_velocity(objects, dt)
+
+        print(magnitude(objects[0].net_force))
+        dist.append(magnitude(objects[0].position)/1000.0)
+        t.append(n*dt)
+        n += 1
+
+
+    plt.plot(t, dist)
+    plt.xlabel("Time (s)")
+    plt.ylabel("Distance to Sun (km)")
+    plt.title("dt = 100")
+    plt.savefig("distance.png")
 
 
 def update_position_and_velocity(objects, dt):
     for object in objects:
-        dr = object.velocity * dt + (1/2) * object.acceleration * dt**2
-        object.add_position(dr)
 
         dv = object.acceleration * dt
         object.add_velocity(dv)
+
+        dr = object.velocity * dt
+        object.add_position(dr)
+
 
 
 def update_forces(objects):
