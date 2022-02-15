@@ -1,0 +1,66 @@
+'''Notes on FTCS. 
+    FTCS is used to solve PDE's. May be a little overkill for something that can be modeled as an ODE
+    ODE numerical methods
+        :Euler method or Runga-Kutta Method. 
+
+    This would be pretty simple to code. 
+    Runga-Kutta is most accurate, but you do need some boundary conditions
+    Euler is better if we want a faster program
+
+Basic layout
+'''
+import numpy as np
+import matplotlib.pyplot as plt
+#Define function that is on the right in ODE example ODE -> y' = -y + sin(x)
+
+#Parameters
+n = 101 #Number of points
+x0 = 0 #Initial x
+xf = 10 #Initial y
+y0 = 1 #Initial Condition
+dx = (xf-x0)/(n-1)
+
+x = np.linspace(x0,xf,n)
+y = np.zeros([n])
+
+y[0] = y0
+for i in range(1,n):
+    y[i] = dx*(-y[i-1]+np.sin(x[i-1])) + y[i-1]
+
+plt.plot(x,y,'o')
+plt.xlabel('Value of X')
+plt.ylabel('Value of Y')
+plt.title('Approximate Solution')
+plt.show()
+
+
+#Alternativley with the Runga Kutta Method
+'''Note that this is Runga Kutta 4th order which only works for first order, but 2nd order can be
+    rewritten in terms of two first order ode's and solved as a system of equations
+'''
+
+def f(x,y):
+    return x + y
+
+def RungeKutta(x0,y0,xn,n):
+    
+    h = (xn-x0)/n #Step Size
+
+    for i in range(n):
+        k1 = h * (f(x0, y0))
+        k2 = h * (f((x0+h/2), (y0+k1/2)))
+        k3 = h * (f((x0+h/2), (y0+k2/2)))
+        k4 = h * (f((x0+h), (y0+k3)))
+        k = (k1+2*k2+2*k3+k4)/6
+        yn = y0 + k
+
+        y0 = yn
+        x0 = x0 + h
+
+    return yn
+
+print(RungeKutta(1,1,10,100))
+
+
+'''Github link to a Runge-Kutta Function : 'https://github.com/twright/Python-Examples/blob/master/runge-kutta-method.py'''
+
