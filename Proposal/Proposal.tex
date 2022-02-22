@@ -21,9 +21,9 @@
 \usepackage{subcaption} % to make sub-figures inside of figures
 
 % TWEAKS FOR PACKAGES
-\usepackage[margin=2cm,a4paper]{geometry} % tweaks margins
+\usepackage[margin=2.54cm,a4paper]{geometry} % tweaks margins
 \captionsetup{justification=centering} % caption justification
-\captionsetup{font=small} % caption text size
+\captionsetup{font=12pt} % caption text size
 \captionsetup{labelfont=bf} % caption label font emphasis (e.g: 'Figure X:')
 \numberwithin{equation}{section} % equations are named according to their section (e.g: 2.1)
 \numberwithin{figure}{section} % figures are named according to their section (e.g: 3.4)
@@ -95,54 +95,48 @@ Date: \@date
 
 \section{Research Topic \& Question}
 
-Here we put our question
+Question: Given a deviation from a planetary Keplerian orbital trajectory, can we determine properties of an intervening planet? \newline
+The goal of our project is to create a computational simulation of a method that was used to predict the location and properties of undiscovered planets - which ultimatley led to the predictions and discovieries and Neptune and Pluto, and continue to create wonder about more potential planets in the Solar System. Our goal is to take in data on the orbits of a set of planets and use and N-body simulator to guess where a planet would need to be to create observed orbital perturbations.
 
+\section{Simulation Description}
+We are analysing our system by way of an N-Body program, which is a tool
+that allows for simulations of multiple bodies interacting according to physical laws and specified boundary
+conditions. In this case, we are using an N-Body simulator to model the orbits of planets around the Sun in our Solar System.
+\par
+In general, you cannot solve analytically the motion of "N bodies" interacting under gravity. The fundamental structure of the N-Body program is that of an interative process, which uses the laws of gravitation at a certain moment in time, and interpolates the current state to the next iteration. Using this method, we can determine the orbital trajectory of a system of planets interacting under gravity.
+\par
+We will begin by taking in data on the orbital trajectories of some system of planets. Then, we will (at first, without much evidence) propose a potential planet that might cause observed orbital perturbations, run the N-Body simulator on the system, and determine how well the planet's orbits fit the data. Using this comparison, we can propose deviations in the proposed planet's properties, making it more massive or further away, and re-run the simulation. We see this as an automatic process, a system of educated "guess and check" until we find agreement between our simulation and the data, and can conclude what type of object could cause observed orbits.
 
-\newpage
-
-\section{Simulation Description - We are analysing our system by way of an N-Body program, which is a tool 
-that allows for simulations of multiple bodies interacting according to physical laws and specified boundary 
-conditions. In this case, we are using an N-Body simulator to model the orbits of planets around the sun in our solar system.
-The fundamental structure of the N-Body program is that of an interative process, which uses the laws of gravitation at 
-a certain moment in time, and then uses that information to interpolate the current state to the next iteration generation. This 
-process is begun with the program reading the parameters and intial states of the bodies participating in the simulation 
-from a configuration JSON file, which includes reading the desired simulation duration as well as the generation time step.
-The program also reads information of inputed instances of an objects class, such as each bodies mass, initial position and velocity. 
-This information is then fed into the main function that starts the simulation.
-After the system is initizlised, the first step in every generation in each iteration is to calculate the net force on each body. 
-Beginning with the first instance of the objects class, the program then iterates to the next object instance, calculates the 
-separation from the stored position attributes, and then evaluates the force on the first instance due to the second using Newton’s 
-Law of Gravitation. Looping over every subsequent instance of the objects class yields the net force on the first object. This 
-process is then repeated for all inputted object instances in the same manner as described before.
-From the net force on each body, it is simply a matter of dividing by the mass to yield the acceleration, and then using kinematic 
-equations of motion, find the position of each body a small time after. Note that in this we approximate the net force on each body 
-over a small time step to be constant, which is a reasonable assumption to make given the small time step, and relatively large 
-astronomical distances, as well as the fact that while in modeling the solar system the separation between planets may vary wildly, 
-the primary contributor to the net force on each object is the sun, whose distance to an individual object does not vary noticeably 
-over a small time interval. Coming to the end of the generation, the program updates the position and velocity attributes for each 
-object in the objects class, as well as adds that generations information into a log built into each object that records position, 
-velocity, and kinetic energy, for later modeling.
-}
-
-\newpage
 
 \section{Required Input Physics}
 
-$$\vec{F} = m \vec{a}$$
+The backbone of our project is Newton's Law of Gravity. In particular, to determine the net force acting on each object, we evaluate $$\vec{F}=GM\sum_{j}\frac{m_{j}}{r_{j}^2}\hat{r_j}$$
 
-\newpage
+In our current code, we assume the acceleration of each body is constant over the time step $\Delta t$, so we begin each iteration by updating its acceleration $\vec{a}$ and computing a $\vec{a}\Delta t$ to add to the current velocity $\vec{v}$. This is a reasonable assumption to make given the small time step, and relatively large
+astronomical distances, as well as the fact that while in modeling the solar system the separation between planets may vary wildly,
+the primary contributor to the net force on each object is the Sun, whose distance to an individual object does not vary noticeably
+over a small time interval. We then compute $\Delta \vec{r} = \vec{v}\Delta t$ and add it to the object's current position. This way, to first order, we keep track of the approximate motion under gravity.
+
+Another mathematical problem we will need to address is how to quantify how similar two orbits are. If we want to determine how much more likley one proposed planet is than another, we need to measure how different the orbits caused by those two are different from the data. As of now, we haven't given this much consideration.
 
 \section{Computational Methods}
 
-\newpage
+
+Our current computational methods are rudimentary in execution. We plan to integrate the FTCS method (Ch. 9.3) or other differential equation methods that would be applicable. Since an N-body problem has not only no closed form function, but also is largley chaotic, the integration methods we covered in class will not be appropriate to solving our problem. Our main goal is to find a method that leverages the most information to give accurate results of where planets move under gravitational influence, a process governed by a second order differential equation.
+\par
+The current implementation of our code already includes a variety of computational methods that make running the simulations seamless.
+Each body that participates in a simulation is established in a JSON file containing information about the object, which our code reads in and converts to a "Body" Python object, whose attributes include mass, position, velocity etc, and methods include updating position, or finding acceleration. We automatically fill-in information we can pull from Astropy for accuracy and ease. Another module contains relevant physical equations, and yet another has the code to run the N-body simulator, which calculates the net force on each body, looping over subsequent iterations until some stopping condition is reached. Simulation parameters like the stopping condition and time-steps are passed through another JSON file which our code parsses before initalizing the N-body module.
+\par
+An important method to be efficient in our project will be deciding what new planets to propose. Given that one planet does not give an answer close to the data, how should we decide to make the next proposition of what planet to inject next? There is probably a computational method hidden in this question, but so far we have not come up with a solution.
+
+
 
 \section{Simulation Set-up}
 
-\newpage
+
 
 \section{Quantities to Inspect}
 
-\newpage
 
 \bibliography{}
 

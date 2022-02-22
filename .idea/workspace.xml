@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0203a649-57a8-43c1-8e8f-77871bd0e7da" name="Changes" comment="Cleaned up Body class">
-      <change afterPath="$PROJECT_DIR$/accel.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/distance.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/velocity.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NBodySims/JoshSim.py" beforeDir="false" afterPath="$PROJECT_DIR$/NBodySims/JoshSim.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimFiles/config.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/SimFiles/config.JSON" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SimObjects/Earth.JSON" beforeDir="false" afterPath="$PROJECT_DIR$/SimObjects/Earth.JSON" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +125,8 @@
       <updated>1643908917352</updated>
       <workItem from="1643908919276" duration="4797000" />
       <workItem from="1644260864970" duration="15942000" />
+      <workItem from="1645494565580" duration="5000" />
+      <workItem from="1645555595153" duration="632000" />
     </task>
     <task id="LOCAL-00001" summary="Changed body to bodies">
       <created>1643914179038</created>
