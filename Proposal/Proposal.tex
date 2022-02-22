@@ -100,7 +100,29 @@ Here we put our question
 
 \newpage
 
-\section{Simulation Description}
+\section{Simulation Description - We are analysing our system by way of an N-Body program, which is a tool 
+that allows for simulations of multiple bodies interacting according to physical laws and specified boundary 
+conditions. In this case, we are using an N-Body simulator to model the orbits of planets around the sun in our solar system.
+The fundamental structure of the N-Body program is that of an interative process, which uses the laws of gravitation at 
+a certain moment in time, and then uses that information to interpolate the current state to the next iteration generation. This 
+process is begun with the program reading the parameters and intial states of the bodies participating in the simulation 
+from a configuration JSON file, which includes reading the desired simulation duration as well as the generation time step.
+The program also reads information of inputed instances of an objects class, such as each bodies mass, initial position and velocity. 
+This information is then fed into the main function that starts the simulation.
+After the system is initizlised, the first step in every generation in each iteration is to calculate the net force on each body. 
+Beginning with the first instance of the objects class, the program then iterates to the next object instance, calculates the 
+separation from the stored position attributes, and then evaluates the force on the first instance due to the second using Newton’s 
+Law of Gravitation. Looping over every subsequent instance of the objects class yields the net force on the first object. This 
+process is then repeated for all inputted object instances in the same manner as described before.
+From the net force on each body, it is simply a matter of dividing by the mass to yield the acceleration, and then using kinematic 
+equations of motion, find the position of each body a small time after. Note that in this we approximate the net force on each body 
+over a small time step to be constant, which is a reasonable assumption to make given the small time step, and relatively large 
+astronomical distances, as well as the fact that while in modeling the solar system the separation between planets may vary wildly, 
+the primary contributor to the net force on each object is the sun, whose distance to an individual object does not vary noticeably 
+over a small time interval. Coming to the end of the generation, the program updates the position and velocity attributes for each 
+object in the objects class, as well as adds that generations information into a log built into each object that records position, 
+velocity, and kinetic energy, for later modeling.
+}
 
 \newpage
 
