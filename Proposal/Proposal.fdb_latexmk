@@ -1,10 +1,10 @@
 # Fdb version 3
-["bibtex Proposal"] 1645733998 "Proposal.aux" "Proposal.bbl" "Proposal" 1645734361
-  "Proposal.aux" 1645734360 1445 1a81ec098a1e161e6afd264bb79b8d6e "pdflatex"
+["bibtex Proposal"] 1645805951 "Proposal.aux" "Proposal.bbl" "Proposal" 1645806044
+  "Proposal.aux" 1645806043 1445 6b7f0e0064e5dc0993a940e6a22c1016 "pdflatex"
   (generated)
   "Proposal.blg"
   "Proposal.bbl"
-["pdflatex"] 1645734359 "Proposal.tex" "Proposal.pdf" "Proposal" 1645734361
+["pdflatex"] 1645806042 "Proposal.tex" "Proposal.pdf" "Proposal" 1645806044
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -120,10 +120,10 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1622563257 2724734 eaf548c60d5b1468c09cd3277689fcfc ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "Proposal.aux" 1645734360 1445 1a81ec098a1e161e6afd264bb79b8d6e "pdflatex"
-  "Proposal.bbl" 1645733998 0 d41d8cd98f00b204e9800998ecf8427e "bibtex Proposal"
-  "Proposal.out" 1645734360 931 8d633c46c23e20e9537a9814493116cf "pdflatex"
-  "Proposal.tex" 1645734361 10671 5340cfc2c83a908d92293a2a56891379 ""
+  "Proposal.aux" 1645806043 1445 6b7f0e0064e5dc0993a940e6a22c1016 "pdflatex"
+  "Proposal.bbl" 1645805951 0 d41d8cd98f00b204e9800998ecf8427e "bibtex Proposal"
+  "Proposal.out" 1645806043 931 8d633c46c23e20e9537a9814493116cf "pdflatex"
+  "Proposal.tex" 1645806044 11063 0686e2531f493b881413bbcf4f7d1ffa ""
   "SoPBanner.jpeg" 1644955752 49855 b4a5f094578ed7cec60f87646267125a ""
   (generated)
   "Proposal.out"

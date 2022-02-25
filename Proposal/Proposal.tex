@@ -95,8 +95,9 @@ Date: \@date
 
 \section{Research Topic \& Question}
 
+Subfield: Astrophysics (Celestial Mechanics) \newline
 Question: Given a deviation from a planetary Keplerian orbital trajectory, can we determine properties of an intervening planet? \newline
-The goal of our project is to create a computational simulation of a method that was used to predict the location and properties of undiscovered planets - which ultimatley led to the predictions and discovieries and Neptune and Pluto, and continue to create wonder about more potential planets in the Solar System. Our goal is to take in data on the orbits of a set of planets and use and N-body simulator to guess where a planet would need to be to create observed orbital perturbations.
+The goal of our project is to create a computational simulation of a method that was used to predict the location and properties of undiscovered planets - which ultimatley led to the predictions and discovieries and Neptune and Pluto, and continues to create wonder about more potential planets in the Solar System. Our goal is to take in data on the orbits of a set of planets and use and N-body simulator to guess where a planet would need to be to create observed orbital perturbations.
 
 \section{Simulation Description}
 We are analysing our system by way of an N-Body program, which is a tool
@@ -136,11 +137,15 @@ The N-body simulator will be visualized with animated scatter plots using the py
 
 
 \section{Quantities to Inspect}
+The ultimate goal is to inspect the properties (mass, orbit, etc...) of a yet undetermined planet which is introducing perterbations into the system. Indirectley, the perterbations themselves are the quantity driving us to inspect this planet's properties, where we will use other intermediate quantities to draw this connection.
+\par
 The simulation studies objects in orbit. Therefore, the pertinent variables to study are force, acceleration, velocity, and position. These variables will change as a function of time as the relative positions between the objects change with time. The masses of the objects are important for these calculations but will not change in the simulation from what they are set as initially. However, different proposed planets will likely vary in mass (as well as other initial conditions) to see which seems to be the best fit for observed perturbations in the other planets’ orbits.
 \par
 The gravitational forces within the system determine how much each object is accelerating. From acceleration we find the velocity and positions of the objects. This information is used to understand and study the planets’ orbits, which is the focus of the project.
 \par
 We are storing the position vector at each iteration tick so we have the set of points forming the curve that represents the orbital trajectory.  Again, we will be analyzing these trajectories to look for similarities, so the similarity between the simulated orbit and the data is another quantity to inspect.
+
+
 
 
 \bibliography{}
