@@ -1,6 +1,6 @@
 {
-  "name":"Earth",
+  "name": "Earth",
   "mass": "<Find>",
-  "iposition": [147e9,0,0],
-  "ivelocity": [0,30e+3,0]
+  "iposition": [1.471e11, 0, 0],
+  "ivelocity": [0, 30287, 0]
 }

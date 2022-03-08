@@ -11,6 +11,12 @@ def RunSim(objects, settings):
     t = []
     n=0
 
+    #Note the call for the forces is neccasary to get the first half step velocities. 
+    clear_forces(objects)
+    update_forces(objects)
+    for object in objects:
+        object.hstep_velocity = object.velocity + 0.5 * dt * object.acceleration
+
     while time() - start_time < settings["Runtime"]:
         clear_forces(objects)
         update_forces(objects)
@@ -29,16 +35,28 @@ def RunSim(objects, settings):
     plt.savefig("distance.png")
 
 
-def update_position_and_velocity(objects, dt):
+# def update_position_and_velocity(objects, dt):
+#     for object in objects:
+
+#         dv = object.acceleration * dt
+#         object.add_velocity(dv)
+
+#         dr = object.velocity * dt
+#         object.add_position(dr)
+
+def update_position_and_velocity(objects,dt):
     for object in objects:
-
-        dv = object.acceleration * dt
-        object.add_velocity(dv)
-
-        dr = object.velocity * dt
+        #Calculate change in position using the time half-step velocity
+        dr = dt * object.hstep_velocity
         object.add_position(dr)
 
+        #Calculate Veclocity for full dt incriment
+        new_velocity = object.hstep_velocity + 0.5 * dt * object.acceleration
+        object.add_velocity(new_velocity)
 
+        #Calculate change in time half-step velocity for next generation
+        dv = dt * object.acceleration
+        object.hstep_velocity += dv
 
 def update_forces(objects):
     for primary_object in objects:
