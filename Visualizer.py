@@ -7,8 +7,7 @@ bodlist = []
 def readPositions(fileName):  # Gets the body's positions from the text file and adds it to a list
     with open(fileName) as tc:
         tccoords = tc.readlines()
-
-    b = tccoords[0].split('\t')
+    b = tccoords
     theb = []
     for l in range(len(b)):
         alist = []
@@ -64,8 +63,6 @@ ax32 = p3.Axes3D(fig)
 """
 
 def setup():
-    ax.axis('off')
-    ax.set_facecolor('black')
     
     #For Body One
     bod1 = bodlist[0]
@@ -90,8 +87,6 @@ def setup():
 
 def Update(i):
     ax.clear()
-    ax.axis('off')
-    ax.set_facecolor('black')
     
     #For Body One
     bod1 = bodlist[0]
@@ -114,5 +109,5 @@ def Update(i):
     return scat1, lin1, lin2, scat2
 
 #the interval is how much time there is between each frame in milliseconds.
-ani = animation.FuncAnimation(fig, Update, init_func=setup, interval=1000, repeat=True)
+ani = animation.FuncAnimation(fig, Update, init_func=setup, interval=400, repeat=True)
 plt.show()
