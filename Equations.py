@@ -15,3 +15,6 @@ def kinetic_energy(body):
 #Rapper for norm() from numpy
 def magnitude(vector):
     return np.linalg.norm(vector)
+
+def distance(p1, p2):
+    return magnitude(p1 - p2)
