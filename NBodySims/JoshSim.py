@@ -7,8 +7,7 @@ def RunSim(objects, settings):
     dt = settings["dt"]
     start_time = time()
 
-    #Note the call for the forces is neccasary to get the first half step velocities. 
-    clear_forces(objects)
+    #Note the call for the forces is neccasary to get the first half step velocities.
     update_forces(objects)
     for object in objects:
         object.hstep_velocity = object.velocity + 0.5 * dt * object.acceleration
