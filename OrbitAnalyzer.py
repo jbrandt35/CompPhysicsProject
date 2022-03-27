@@ -44,7 +44,7 @@ def get_ellipse_params(coefficients):
     elif B == 0.0 and A > C:
         theta = 90
 
-    return (a,b, theta)
+    return (a, b, theta)
 
 
 def get_x(data):
