@@ -24,8 +24,6 @@ def parse_objects(files):
                 print("Sun's mass not provided, pulling from Astropy")
                 data["mass"] = constants.M_sun.value
 
-
-
         body = Body(data["name"], data["mass"], data["iposition"], data["ivelocity"])
 
         print(f"Successfully parsed {body.name}")

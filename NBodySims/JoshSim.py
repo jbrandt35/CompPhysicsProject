@@ -1,6 +1,7 @@
 from Equations import *
 from time import time
 import OrbitAnalyzer
+import matplotlib.pyplot as plt
 
 
 def RunSim(objects, settings):
@@ -19,6 +20,10 @@ def RunSim(objects, settings):
         update_velocity(objects, dt)
 
     OrbitAnalyzer.get_orbit_params(objects[0].position_history)
+
+    #Plot the orbits
+    plot_orbits(objects)
+
 
 
 def update_position(objects, dt):
@@ -50,3 +55,16 @@ def update_forces(objects):
 def clear_forces(objects):
     for object in objects:
         object.clear_force()
+
+def plot_orbits(objects):
+    for object in objects:
+        x_coords = OrbitAnalyzer.get_x(object.position_history)/constants.au.value
+        y_coords = OrbitAnalyzer.get_y(object.position_history)/constants.au.value
+
+        plt.plot(x_coords, y_coords, label = object.name)
+
+    plt.legend()
+    axes = plt.gca()
+    axes.set_aspect(1)
+    plt.title("Simulated Orbital Trajectories (AU)")
+    plt.savefig("Figures/trajectory.png")

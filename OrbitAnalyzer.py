@@ -6,7 +6,7 @@ def get_orbit_params(orbit):
     #Project data into ecliptic - remove this line when doing 3D comparisons
     data = project_into_ecliptic(orbit)
 
-    x, y = get_x(data)/1.496e11, get_y(data)/1.496e11
+    x, y = get_x(data)/constants.au.value, get_y(data)/constants.au.value
 
     b = -(x**2)
     A = np.column_stack((y**2, x*y, x, y, np.ones(len(x))))
