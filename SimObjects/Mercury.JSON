@@ -1,5 +1,5 @@
 {
-  "name": "Mercury",
+  "name": "mercury",
   "mass": 3.285e23,
   "iposition": [107.48e9, 0, 0],
   "ivelocity": [0, 35.26e3, 0]
