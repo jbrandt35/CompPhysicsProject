@@ -10,6 +10,7 @@
 \usepackage{url} % to incorporate clickable links
 \usepackage{cite} % takes care of citations
 \usepackage[final]{hyperref} % adds hyper links inside the generated PDF file
+\usepackage{placeins}
 
 % NECESSARY FOR INCREASED CUSTOMIZATION PACKAGES
 \usepackage{newfloat} % for defining new float in environments (e.g: figure and tables are floats)
@@ -97,26 +98,36 @@ Date: \@date
 
 Subfield: Astrophysics (Celestial Mechanics) \newline
 Question: Given a deviation from a planetary Keplerian orbital trajectory, can we determine properties of an intervening planet? \newline
-The goal of our project is to create a computational simulation of a method that was used to predict the location and properties of undiscovered planets - which ultimatley led to the predictions and discovieries and Neptune and Pluto, and continues to create wonder about more potential planets in the Solar System. Our goal is to take in data on the orbits of a set of planets and use and N-body simulator to guess where a planet would need to be to create observed orbital perturbations.
+The goal of our project is to create a computational simulation of a method that was used to predict the location and properties of undiscovered planets - which ultimatley led to the predictions and discovieries and Neptune and Pluto, and continues to create wonder about more potential planets in the Solar System. Our goal is to take in data on the orbits of a set of planets and use and N-body simulator to guess where a planet would need to be to create observed orbital perturbations. \newline
+Repo: \url{https://github.com/jbrandt35/CompPhysicsProject}
 
 \section{Current Setup}
+
+For our N-body simulator, we decided to implement the Verlet Method, inspired by one of the homework problems (described more in \ref{sec:difficulties}). \par
+For initial conditions, our current implementation uses JSON files. Each planet/star has a JSON file with information about its initial position and velocity in the solar system with respect to the Sun. This data is taken off of Wikipedia. We are currently working to use an ephemeris from Astropy to get more accurate and specific initial conditions. \par
+Through our testing, we are getting satisfactory results in very small time-domain runtimes. We can complete multiple Earth orbits with a time-step of one hour in only 10 seconds on our laptops. We plan to run our code on PACE, and are excited to see the performance we will be able to achieve.
 
 
 
 \section{Current Status}
 
+Currently, with the Earth-Sun system alone, we can calculate the eccentricity, semi-major axis and orientation of Earth's orbit in the ecliptic to sub 1\% accuracy. We have just began experimenting running our Simulator with more planets, and will include that data in \ref{sec:figures}. We have code that takes the output of our N-body simulator and calculates all orbital properties by fitting an ellipse to it using least squares. We are beggining to get ready to try and test whether or not our accuracy/analysis will be able to pick up on the orbital perterbations we plan to recreate/test, such as those of Uranus. Then, we will begin to develop the process to make guesses on the planets causing the perterbations, and that is it. We have significant progress.
 
 
 \section{Difficulties}
-
-
+\label{sec:difficulties}
+We began our project by creating a very elementary N-body simulator which simply calculated acceleration and mulitplied by a time step over and over. At the very beggining, the Earth was crashing into the Sun. Then we got it to orbit, but slowly spiral away. We fixed these problems by using the Verlet method, and are now achieving great results.
 
 
 \section{Figures}
+\label{sec:figures}
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{trajectory.png}
+  \label{fig:trajectory}
+\end{figure}
 
 
-
-\section{Quantities to Inspect}
 
 
 
