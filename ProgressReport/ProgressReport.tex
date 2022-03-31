@@ -110,18 +110,26 @@ Through our testing, we are getting satisfactory results in very small time-doma
 
 
 \section{Current Status}
-We currently have a full solar system N-Body Simulator model, which gives stable orbits for all the planets in solar system, and outputs arrays upon which we can perform various analysis to find astronomical quantities of interest. We have also built functionality in the program that calculates the eccentricity, semi-major axis and orientation of a planetary body given the position history array that our program ouputs for every body. We have code that takes this output and calculates all these orbital properties by fitting an ellipse to the orbit using the method of least squares. We are beggining to get ready to test whether our analysis will be able to pick up on orbital perterbations we plan to recreate/test, such as those of Uranus. Then we will beginn to develop the process to built the functionality to predict the attributes of the planets causing the perterbations, in a similair manner to how several planets were initially discovered.
+We currently have a full solar system N-Body Simulator model, which gives stable orbits for all the planets in solar system, and outputs arrays upon which we can perform various analysis to find astronomical quantities of interest. We have also built functionality in the program that calculates the eccentricity, semi-major axis and orientation of a planetary body given the position history array that our program ouputs for every body. We have code that takes this output and calculates all these orbital properties by fitting an ellipse to the orbit using the method of least squares. We are beggining to get ready to test whether our analysis will be able to pick up on orbital perterbations we plan to recreate/test, such as those of Uranus. Then we will begin to develop the process to build the functionality to predict the attributes of the planets causing the perterbations, in a similair manner to how several planets were initially discovered.
 
 \section{Difficulties}
 \label{sec:difficulties}
-We began our project by creating a very elementary N-body simulator which simply calculated acceleration and mulitplied by a time step over and over. At the very beggining, the Earth was crashing into the Sun. Then we got it to orbit, but slowly spiral away. We fixed these problems by using the Verlet method, and are now achieving great results. An additional diffuculty we ran into was that initializing all planets at perihilion all along the x-axis caused Mercury to be slung out of its orbit, which made us realize that manually initializing position and velocity for every body in such an arbitrary manner would introduce effects that did not mirror the behavior of the actual solar system, so we altered the code to pull position and velocity initial values from Astropy's Ephemeris module, which has since produced a more accurate representation of the solar system. While this solved one of our problems, it does present a problem we are currently working on, namely that to calculate orbital properties of each body, we fit the three dimensional orbit to an ellipse, which is more difficult using the Astropy Ephemeris coordinates, which uses the barycentric center of the solar system as its reference frame. 
+We began our project by creating a very elementary N-body simulator which simply calculated acceleration and mulitplied by a time step over and over. At the very beggining, the Earth was crashing into the Sun. Then we got it to orbit, but slowly spiral away. We fixed these problems by using the Verlet method, and are now achieving great results. An additional diffuculty we ran into was that initializing all planets at perihilion all along the x-axis caused Mercury to be slung out of its orbit, which made us realize that manually initializing position and velocity for every body in such an arbitrary manner would introduce effects that did not mirror the behavior of the actual solar system, so we altered the code to pull position and velocity initial values from Astropy's Ephemeris module, which has since produced a more accurate representation of the solar system. While this solved one of our problems, it does present a problem we are currently working on, namely that to calculate orbital properties of each body, we fit the three dimensional orbit to an ellipse, which is more difficult using the Astropy Ephemeris coordinates, which uses the barycentric center of the solar system as its reference frame. So, we are looking into implementing JPL's Horizon API which can give the Ephemeris data with respect to the ecliptic plane.
 
 
 \section{Figures}
 \label{sec:figures}
 
-\begin{figure}[h]
-  \includegraphics[width=\linewidth]{trajectory.png}
+\begin{itemize}
+  \item Orbital Trajectories of the Solar System planets
+  \item Difference in orbital trajectories between our guesses of planet casuing perterbations over time
+  \item Matches between our guesses and real values over time
+  \item Diagnostic Plots like constant mechanical energy of the solar system over time
+  \item Changes in guessed planetary properties over time
+\end{itemize}}
+
+\begin{figure}[h!]
+  \includegraphics[scale = 0.75]{trajectory.png}
   \label{fig:trajectory}
 \end{figure}
 
