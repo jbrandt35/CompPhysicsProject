@@ -6,8 +6,8 @@ import numpy as np
 import requests
 
 #creates Dict that has the planets ID's to make the API call
-planet_names = ["earth", "sun", "mercury", "jupiter", "mars", "venus", "saturn", "uranus", "neptune"]
-planet_commands = [399,10,199,599,499,299,699,799,899]
+planet_names = ["earth", "sun", "mercury", "jupiter", "mars", "venus", "saturn", "uranus", "neptune","moon"]
+planet_commands = [399,10,199,599,499,299,699,799,899,301]
 Planets = dict(zip(planet_names,planet_commands))
 
 
