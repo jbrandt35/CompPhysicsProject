@@ -1,5 +1,5 @@
 {
-  "Planets": ["Earth", "Sun", "Mercury", "Jupiter", "Mars"],
+  "Planets": ["Earth", "Sun", "Mercury", "Jupiter", "Mars", "Venus", "Saturn", "Uranus", "Neptune"],
   "dt": 3600,
   "Runtime": 10
 }
