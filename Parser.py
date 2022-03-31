@@ -2,6 +2,14 @@ from Objects import Body
 import json
 from astropy import constants
 import os
+from astropy.time import Time
+from astropy.coordinates import solar_system_ephemeris, EarthLocation
+from astropy.coordinates import get_body_barycentric_posvel, get_body
+import numpy as np
+
+#t is just the time we are initializing, and the line below sets what ephemeris the code will use. There are a couple different options for that
+t = Time("2022-04-27 23:22")
+solar_system_ephemeris.set('jpl')
 
 #Takes in a list of JSON Files, returns a list of "body" objects
 def parse_objects(files):
@@ -24,21 +32,21 @@ def parse_objects(files):
                 print("Sun's mass not provided, pulling from Astropy")
                 data["mass"] = constants.M_sun.value
 
-        # if data["iposition"] == "<Find>":
-        #     #Find the bodies name
-        #     BodyName = data["name"]
-        #     #get tupe of position and velocity for the body
-        #     BodyInstance = get_body_barycentric_posvel(BodyName,t)
-        #     #get position array
-        #     BodyCoords = np.array(BodyInstance[0].get_xyz(),float)
-        #     data["iposition"] = BodyCoords * 10e3 #10e3 is added because ephemeris gives value in km
+        if data["iposition"] == "<Find>":
+            #Find the bodies name
+            BodyName = data["name"]
+            #get tupe of position and velocity for the body
+            BodyInstance = get_body_barycentric_posvel(BodyName,t)
+            #get position array
+            BodyCoords = np.array(BodyInstance[0].get_xyz(),float)
+            data["iposition"] = BodyCoords * 10e2 #10e3 is added because ephemeris gives value in km
 
-        # if data["ivelocity"] == "<Find>":
-        #     BodyName = data["name"]
-        #     BodyInstance = get_body_barycentric_posvel(BodyName,t)
-        #     #get velocity array
-        #     BodyVel = np.array(BodyInstance[1].get_xyz(),float)
-        #     data["ivelocity"] = BodyVel * 0.011574074 #float value is conversion factor from km/day to m/s
+        if data["ivelocity"] == "<Find>":
+            BodyName = data["name"]
+            BodyInstance = get_body_barycentric_posvel(BodyName,t)
+            #get velocity array
+            BodyVel = np.array(BodyInstance[1].get_xyz(),float)
+            data["ivelocity"] = BodyVel * 0.011574074 #float value is conversion factor from km/day to m/s
 
         ###################################################################################
         body = Body(data["name"], data["mass"], data["iposition"], data["ivelocity"])

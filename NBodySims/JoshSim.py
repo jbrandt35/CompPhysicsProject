@@ -20,7 +20,7 @@ def RunSim(objects, settings):
         update_velocity(objects, dt)
 
     OrbitAnalyzer.get_orbit_params(objects[0].position_history)
-
+    print(objects[0].position_history[0])
     #Plot the orbits
     plot_orbits(objects)
 
