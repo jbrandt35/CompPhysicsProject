@@ -2,14 +2,14 @@ from Objects import Body
 import json
 from astropy import constants
 import os
-from astropy.time import Time
-from astropy.coordinates import solar_system_ephemeris, EarthLocation
-from astropy.coordinates import get_body_barycentric_posvel, get_body
 import numpy as np
+import requests
 
-#t is just the time we are initializing, and the line below sets what ephemeris the code will use. There are a couple different options for that
-t = Time("2022-04-27 23:22")
-solar_system_ephemeris.set('jpl')
+#creates Dict that has the planets ID's to make the API call
+planet_names = ["earth", "sun", "mercury", "jupiter", "mars", "venus", "saturn", "uranus", "neptune"]
+planet_commands = [399,10,199,599,499,299,699,799,899]
+Planets = dict(zip(planet_names,planet_commands))
+
 
 #Takes in a list of JSON Files, returns a list of "body" objects
 def parse_objects(files):
@@ -33,20 +33,36 @@ def parse_objects(files):
                 data["mass"] = constants.M_sun.value
 
         if data["iposition"] == "<Find>":
-            #Find the bodies name
-            BodyName = data["name"]
-            #get tupe of position and velocity for the body
-            BodyInstance = get_body_barycentric_posvel(BodyName,t)
-            #get position array
-            BodyCoords = np.array(BodyInstance[0].get_xyz(),float)
-            data["iposition"] = BodyCoords * 10e2 #10e3 is added because ephemeris gives value in km
+            #determine planet ID
+            planetID = Planets[data["name"]]
+            #make API call to find iposition
+            url = "https://ssd.jpl.nasa.gov/api/horizons.api?"
+            #define parameters
+            start_time = '2022-01-01'
+            stop_time = '2022-01-02'
+            #built url
+            url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@0'"
+            url += "&COMMAND='{}'&START_TIME='{}'&STOP_TIME='{}'".format(planetID,start_time,stop_time)
+
+            response = requests.get(url).json()
+            result = response['result']
+            data["iposition"] = np.array(initial_position(result),float)
 
         if data["ivelocity"] == "<Find>":
-            BodyName = data["name"]
-            BodyInstance = get_body_barycentric_posvel(BodyName,t)
-            #get velocity array
-            BodyVel = np.array(BodyInstance[1].get_xyz(),float)
-            data["ivelocity"] = BodyVel * 0.011574074 #float value is conversion factor from km/day to m/s
+            #determine planet ID
+            planetID = Planets[data["name"]]
+            #make API call to find iposition
+            url = "https://ssd.jpl.nasa.gov/api/horizons.api?"
+            #define parameters
+            start_time = '2022-01-01'
+            stop_time = '2022-01-02'
+            #built url
+            url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@0'"
+            url += "&COMMAND='{}'&START_TIME='{}'&STOP_TIME='{}'".format(planetID,start_time,stop_time)
+
+            response = requests.get(url).json()
+            result = response['result']
+            data["ivelocity"] = initial_velocity(result)
 
         ###################################################################################
         body = Body(data["name"], data["mass"], data["iposition"], data["ivelocity"])
@@ -67,3 +83,52 @@ def parse_config(file):
         print(f"Couldn't load {file}")
 
     return data
+
+
+#functions to parse the API output result string
+def initial_position(string):
+    #find index of first 'X = '
+    idx = string.find('X =')
+    new_string = string[idx:-1]
+    #find first new line
+    idx = new_string.find('\n')
+    new_string = new_string[0:idx]
+
+    #find starting index's for position values
+    x_index = new_string.find('X =')
+    y_index = new_string.find('Y =')
+    z_index = new_string.find('Z =')
+    
+
+    xString = new_string[x_index:y_index].split('=')#might need to have conversion factor for units
+    yString = new_string[y_index:z_index].split('=')
+    zString = (new_string[z_index:-1] + new_string[-1]).split('=')
+
+    xVal = float(xString[1]) * 10e2
+    yVal = float(yString[1]) * 10e2
+    zVal = float(zString[1]) * 10e2
+
+    return [xVal,yVal,zVal]
+
+def initial_velocity(string):
+    #find index of first 'VX = '
+    idx = string.find('VX=')
+    new_string = string[idx:-1]
+    #find first new line
+    idx = new_string.find('\n')
+    new_string = new_string[0:idx]
+
+    #find starting index's for velocity values
+    x_index = new_string.find('VX=')
+    y_index = new_string.find('VY=')
+    z_index = new_string.find('VZ=')
+
+    xString = new_string[x_index:y_index].split('=')#might need to have conversion factor for units
+    yString = new_string[y_index:z_index].split('=')
+    zString = (new_string[z_index:-1] + new_string[-1]).split('=')
+
+    xVal = float(xString[1]) * 10e2
+    yVal = float(yString[1]) * 10e2
+    zVal = float(zString[1]) * 10e2
+
+    return [xVal,yVal,zVal]
