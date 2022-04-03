@@ -1,10 +1,10 @@
 import Parser
-from NBodySims import JoshSim as NbodySimulator
+import Simulator as NbodySimulator
 
 options = Parser.parse_config("SimFiles/config.JSON")
 
 planets = Parser.parse_objects(options["Planets"])
 
-#Example of starting N-body simulator
+print(f"Starting N-body simulator with dt={options['dt']} seconds for {options['Runtime']} seconds...")
 NbodySimulator.RunSim(planets, options)
 

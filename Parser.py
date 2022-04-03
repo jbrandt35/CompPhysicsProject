@@ -4,6 +4,18 @@ from astropy import constants
 import os
 import numpy as np
 import requests
+import ssl, urllib3
+
+
+class CustomHttpAdapter(requests.adapters.HTTPAdapter):
+    def __init__(self, ssl_context=None, **kwargs):
+        self.ssl_context = ssl_context
+        super().__init__(**kwargs)
+
+    def init_poolmanager(self, connections, maxsize, block=False):
+        self.poolmanager = urllib3.poolmanager.PoolManager(
+            num_pools=connections, maxsize=maxsize,
+            block=block, ssl_context=self.ssl_context)
 
 #creates Dict that has the planets ID's to make the API call
 planet_names = ["earth", "sun", "mercury", "jupiter", "mars", "venus", "saturn", "uranus", "neptune","moon"]
@@ -13,6 +25,7 @@ Planets = dict(zip(planet_names,planet_commands))
 
 #Takes in a list of JSON Files, returns a list of "body" objects
 def parse_objects(files):
+    print(files)
     bodies = []
     for file in files:
         file = os.path.join("SimObjects", file + ".JSON")
@@ -33,6 +46,7 @@ def parse_objects(files):
                 data["mass"] = constants.M_sun.value
 
         if data["iposition"] == "<Find>":
+            print(f"{data['name']}'s initial position not provided, pulling from JPL.")
             #determine planet ID
             planetID = Planets[data["name"]]
             #make API call to find iposition
@@ -41,14 +55,19 @@ def parse_objects(files):
             start_time = '2022-01-01'
             stop_time = '2022-01-02'
             #built url
-            url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@0'"
+            url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@10'"
             url += "&COMMAND='{}'&START_TIME='{}'&STOP_TIME='{}'".format(planetID,start_time,stop_time)
 
-            response = requests.get(url).json()
+            session = requests.session()
+            ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+            ctx.options |= 0x4
+            session.mount('https://', CustomHttpAdapter(ctx))
+            response = session.get(url).json()
             result = response['result']
             data["iposition"] = np.array(initial_position(result),float)
 
         if data["ivelocity"] == "<Find>":
+            print(f"{data['name']}'s initial velocity not provided, pulling from JPL.")
             #determine planet ID
             planetID = Planets[data["name"]]
             #make API call to find iposition
@@ -57,10 +76,14 @@ def parse_objects(files):
             start_time = '2022-01-01'
             stop_time = '2022-01-02'
             #built url
-            url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@0'"
+            url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@10'"
             url += "&COMMAND='{}'&START_TIME='{}'&STOP_TIME='{}'".format(planetID,start_time,stop_time)
 
-            response = requests.get(url).json()
+            session = requests.session()
+            ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
+            ctx.options |= 0x4
+            session.mount('https://', CustomHttpAdapter(ctx))
+            response = session.get(url).json()
             result = response['result']
             data["ivelocity"] = initial_velocity(result)
 
