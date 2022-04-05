@@ -20,7 +20,7 @@ def RunSim(objects, settings):
         update_velocity(objects, dt)
 
     print("Simulation ended. See Figures for trajectory plot and printing orbital data below.")
-    OrbitAnalyzer.get_orbit_params(objects[0].position_history)
+    OrbitAnalyzer.get_orbit_params(objects[7].position_history)
     #Plot the orbits
     plot_orbits(objects)
 
