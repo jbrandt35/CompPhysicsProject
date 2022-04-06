@@ -2,6 +2,7 @@ from Equations import *
 from time import time
 import OrbitAnalyzer
 import matplotlib.pyplot as plt
+import os
 
 
 def RunSim(objects, settings):
@@ -23,6 +24,8 @@ def RunSim(objects, settings):
     OrbitAnalyzer.get_orbit_params(objects[7].position_history)
     #Plot the orbits
     plot_orbits(objects)
+    #create output files
+    create_files(objects)
 
 
 
@@ -68,3 +71,37 @@ def plot_orbits(objects):
     axes.set_aspect(1)
     plt.title("Simulated Orbital Trajectories (AU)")
     plt.savefig("Figures/trajectory.png")
+
+def create_files(objects):
+    for object in objects:
+        #Position Array to write to output file
+        pos_history = object.position_history
+        vel_history = object.velocity_history
+
+        #create text file name
+        filename = object.name + "_output.txt"
+        filePath = os.path.join("OutputFiles",filename)
+
+        #Other parameters included in the output
+        Name = object.name
+        Name = Name[0].upper() + Name[1:]
+
+        outFile = open(filePath,'w')
+        outFile.write(f"------------------------------------------------\nObject: {Name}\nMass: {object.mass} kg\n\n")
+        outFile.write("------------------------------------------------\nPosition History (x,y,z) au\n\n")
+        for i in range(0,len(pos_history),10):
+            x_pos = meters_to_au(pos_history[i][0])
+            y_pos = meters_to_au(pos_history[i][1])
+            z_pos = meters_to_au(pos_history[i][2])
+
+            x_pos = "{:.3f}".format(x_pos)
+            y_pos = "{:.3f}".format(y_pos)
+            z_pos = "{:.3f}".format(z_pos)
+
+            outFile.write(f"X = {x_pos}  Y = {y_pos}  Z = {z_pos}\n")
+
+        outFile.write("\n\n\nOutput File Completed")
+        outFile.close()
+
+def meters_to_au(float_num):
+    return round(float_num / 1.496e11,3)

@@ -17,6 +17,7 @@ def get_orbit_params(orbit):
 
     eccentricity = np.sqrt(1 - (semi_minor_axis/semi_major_axis)**2)
 
+
     print(f"The semi-major axis is {semi_major_axis} AU")
     print(f"The semi-minor axis is {semi_minor_axis} AU")
     print(f"The eccentricity is {eccentricity}")
