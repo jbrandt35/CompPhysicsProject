@@ -18,6 +18,7 @@ class Body:
         self.semi_minor = 0.0
         self.eccentricity = 0.0
         self.rotation = 0.0
+        self.inclination = 0.0
 
     def __repr__(self):
         return self.name

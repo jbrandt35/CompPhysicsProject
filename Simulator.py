@@ -87,7 +87,7 @@ def create_files(objects):
         Name = Name[0].upper() + Name[1:]
 
         outFile = open(filePath,'w')
-        outFile.write(f"------------------------------------------------\nObject: {Name}\nMass: {object.mass} kg\nSemi-Major Axis: {object.semi_major} AU\nSemi-Minor Axis: {object.semi_minor} AU\nEccentricity: {object.eccentricity} AU\nRotation: {object.rotation} degrees\n")
+        outFile.write(f"------------------------------------------------\nObject: {Name}\nMass: {object.mass} kg\nSemi-Major Axis: {object.semi_major} AU\nSemi-Minor Axis: {object.semi_minor} AU\nEccentricity: {object.eccentricity} AU\nRotation: {object.rotation} degrees\nInclination: {object.inclination} degrees\n")
         outFile.write("------------------------------------------------\nPosition History (x,y,z) AU\n\n")
         for i in range(0,len(pos_history),10):
             x_pos = meters_to_au(pos_history[i][0])
