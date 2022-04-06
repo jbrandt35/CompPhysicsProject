@@ -1,27 +1,29 @@
 from Equations import *
 
 
-def get_orbit_params(orbit):
+def get_orbit_params(objects):
+    for object in objects:
+        #extract orbit from object instance
+        orbit = object.position_history
+        #Project data into ecliptic - remove this line when doing 3D comparisons
+        data = project_into_ecliptic(orbit)
 
-    #Project data into ecliptic - remove this line when doing 3D comparisons
-    data = project_into_ecliptic(orbit)
+        x, y = get_x(data)/constants.au.value, get_y(data)/constants.au.value
 
-    x, y = get_x(data)/constants.au.value, get_y(data)/constants.au.value
+        b = -(x**2)
+        A = np.column_stack((y**2, x*y, x, y, np.ones(len(x))))
 
-    b = -(x**2)
-    A = np.column_stack((y**2, x*y, x, y, np.ones(len(x))))
+        coefficients = np.linalg.lstsq(A, b, rcond=None)[0]
 
-    coefficients = np.linalg.lstsq(A, b, rcond=None)[0]
+        semi_major_axis, semi_minor_axis, theta = get_ellipse_params(coefficients)
 
-    semi_major_axis, semi_minor_axis, theta = get_ellipse_params(coefficients)
+        eccentricity = np.sqrt(1 - (semi_minor_axis/semi_major_axis)**2)
 
-    eccentricity = np.sqrt(1 - (semi_minor_axis/semi_major_axis)**2)
+        object.semi_major = semi_major_axis
+        object.semi_minor = semi_minor_axis
+        object.eccentricity = eccentricity
+        object.rotation = theta
 
-
-    print(f"The semi-major axis is {semi_major_axis} AU")
-    print(f"The semi-minor axis is {semi_minor_axis} AU")
-    print(f"The eccentricity is {eccentricity}")
-    print(f"The orbit is rotated by {theta} degrees")
 
 
 def get_ellipse_params(coefficients):

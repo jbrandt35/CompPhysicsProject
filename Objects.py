@@ -14,6 +14,10 @@ class Body:
         self.net_force = np.zeros(3, float)
         self.acceleration = np.zeros(3, float)
         self.hstep_velocity = 0.0
+        self.semi_major = 0.0
+        self.semi_minor = 0.0
+        self.eccentricity = 0.0
+        self.rotation = 0.0
 
     def __repr__(self):
         return self.name
