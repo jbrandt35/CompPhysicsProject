@@ -33,9 +33,9 @@ class Body:
     def clear_force(self):
         self.net_force = np.zeros(3, float)
 
-    def add_position(self,new_position):
+    def add_position(self, new_position, barycenter):
         self.position += new_position
-        self.position_history.append(np.copy(self.position))
+        self.position_history.append(np.copy(self.position)-barycenter)
 
     def add_velocity(self,new_velocity):
         self.velocity += new_velocity

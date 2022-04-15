@@ -8,6 +8,8 @@ def RunSim(objects, settings):
     dt = settings["dt"]
     start_time = time()
 
+    barycenters = []
+
     #Note the call for the forces is neccasary to get the first half step velocities.
     update_forces(objects)
     for object in objects:
@@ -15,7 +17,7 @@ def RunSim(objects, settings):
 
     while time() - start_time < settings["Runtime"]:
 
-        update_position(objects, dt)
+        update_position(objects, dt, barycenters)
         update_forces(objects)
         update_velocity(objects, dt)
 
@@ -29,12 +31,16 @@ def RunSim(objects, settings):
 
     Output.plot_eccentricity(objects[0], settings)
 
+    Output.plot_barycenter(barycenters)
 
-def update_position(objects, dt):
+
+def update_position(objects, dt, barycenters):
+    barycenter = get_barycenter(objects)
+    barycenters.append(magnitude(barycenter))
     for object in objects:
         #Calculate change in position using the time half-step velocity
         dr = dt * object.hstep_velocity
-        object.add_position(dr)
+        object.add_position(dr, barycenter)
 
 
 def update_velocity(objects, dt):

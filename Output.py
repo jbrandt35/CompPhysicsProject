@@ -75,7 +75,15 @@ def plot_eccentricity(object, settings):
     plt.plot(np.array(range(len(eccentricities))) + 1, eccentricities)
     plt.xlabel("Years")
     plt.ylabel("Eccentricity")
-    plt.title("Without Jupiter")
     plt.savefig("Figures/eccentricity.png")
+
+
+def plot_barycenter(barycenters):
+
+    plt.close()
+    plt.plot(barycenters)
+    plt.xlabel("Time")
+    plt.ylabel("Magnitude of Barycenters")
+    plt.savefig("Figures/barycenter.png")
 
 
