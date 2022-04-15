@@ -110,7 +110,7 @@ def call_api(data, settings):
     # define parameters
     start_time, stop_time = date, '-'.join(date.split("-")[:2]) + "-" + ("0" + str(int(date.split("-")[2]) + 1))[1:]
     # build url
-    url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@10'"
+    url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@0'"
     url += "&COMMAND='{}'&START_TIME='{}'&STOP_TIME='{}'".format(planetID, start_time, stop_time)
 
     session = requests.session()

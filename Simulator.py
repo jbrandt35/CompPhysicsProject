@@ -1,8 +1,7 @@
 from Equations import *
 from time import time
 import OrbitAnalyzer
-import matplotlib.pyplot as plt
-import os
+import Output
 
 
 def RunSim(objects, settings):
@@ -20,13 +19,15 @@ def RunSim(objects, settings):
         update_forces(objects)
         update_velocity(objects, dt)
 
-    print("Simulation ended. See Figures for trajectory plot and printing orbital data below.")
+    print("Simulation ended.")
+
     OrbitAnalyzer.get_orbit_params(objects)
     #Plot the orbits
-    plot_orbits(objects)
+    Output.plot_orbits(objects)
     #create output files
-    create_files(objects)
+    Output.create_files(objects)
 
+    Output.plot_eccentricity(objects[0], settings)
 
 
 def update_position(objects, dt):
@@ -34,6 +35,7 @@ def update_position(objects, dt):
         #Calculate change in position using the time half-step velocity
         dr = dt * object.hstep_velocity
         object.add_position(dr)
+
 
 def update_velocity(objects, dt):
     for object in objects:
@@ -59,49 +61,3 @@ def clear_forces(objects):
     for object in objects:
         object.clear_force()
 
-def plot_orbits(objects):
-    for object in objects:
-        x_coords = OrbitAnalyzer.get_x(object.position_history)/constants.au.value
-        y_coords = OrbitAnalyzer.get_y(object.position_history)/constants.au.value
-
-        plt.plot(x_coords, y_coords, label = object.name)
-
-    plt.legend()
-    axes = plt.gca()
-    axes.set_aspect(1)
-    plt.title("Simulated Orbital Trajectories (AU)")
-    plt.savefig("Figures/trajectory.png")
-
-def create_files(objects):
-    for object in objects:
-        #Position Array to write to output file
-        pos_history = object.position_history
-        vel_history = object.velocity_history
-
-        #create text file name
-        filename = object.name + "_output.txt"
-        filePath = os.path.join("OutputFiles",filename)
-
-        #Other parameters included in the output
-        Name = object.name
-        Name = Name[0].upper() + Name[1:]
-
-        outFile = open(filePath,'w')
-        outFile.write(f"------------------------------------------------\nObject: {Name}\nMass: {object.mass} kg\nSemi-Major Axis: {object.semi_major} AU\nSemi-Minor Axis: {object.semi_minor} AU\nEccentricity: {object.eccentricity} AU\nRotation: {object.rotation} degrees\nInclination: {object.inclination} degrees\n")
-        outFile.write("------------------------------------------------\nPosition History (x,y,z) AU\n\n")
-        for i in range(0,len(pos_history),10):
-            x_pos = meters_to_au(pos_history[i][0])
-            y_pos = meters_to_au(pos_history[i][1])
-            z_pos = meters_to_au(pos_history[i][2])
-
-            x_pos = "{:.3f}".format(x_pos)
-            y_pos = "{:.3f}".format(y_pos)
-            z_pos = "{:.3f}".format(z_pos)
-
-            outFile.write(f"X = {x_pos}  Y = {y_pos}  Z = {z_pos}\n")
-
-        outFile.write("\n\n\nOutput File Completed")
-        outFile.close()
-
-def meters_to_au(float_num):
-    return round(float_num / 1.496e11,3)

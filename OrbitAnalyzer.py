@@ -96,7 +96,7 @@ def project_point_into_plane(point, coefficients):
     return np.copy(point) - dist * n
 
 
-def rotate_orbital_plane_into_ecliptic(orbit, plane_coefficients):
+def rotate_orbital_plane_into_ecliptic(plane_coefficients):
 
     #FAST USING ARRAY ARITHMETIC!!!!
 
@@ -123,11 +123,7 @@ def rotate_orbital_plane_into_ecliptic(orbit, plane_coefficients):
     rotation_matrix[2, 1] = u_1 * sin_theta
     rotation_matrix[2, 2] = cos_theta
 
-    rotated_orbit = []
-    for point in orbit:
-        rotated_orbit.append(np.matmul(rotation_matrix, point))
-
-    return rotated_orbit
+    return np.matmul(rotation_matrix, plane_coefficients)
 
 def get_x(data):
     x = []

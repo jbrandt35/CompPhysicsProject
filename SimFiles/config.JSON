@@ -1,5 +1,5 @@
 {
-  "Planets": ["Earth", "Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
+  "Planets": ["Earth", "Sun", "Mars", "Saturn", "Uranus", "Neptune", "Mercury", "Venus", "Jupiter"],
   "dt": 3600,
   "Runtime": 20,
   "Ephemeris Date": "2001-01-10"
