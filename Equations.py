@@ -11,11 +11,18 @@ def gravitational_force(body1, body2):
     return r_hat * constants.G.value * body1.mass * body2.mass / magnitude(r)**2
 
 
+def gravitational_potential_energy(body1, body2):
+
+    r = magnitude(body2.position - body1.position)
+
+    return -constants.G.value * body1.mass * body2.mass / r
+
+
 def kinetic_energy(body):
     return (1/2) * body.mass * magnitude(body.velocity)**2
 
 
-#Rapper for norm() from numpy
+#Wrapper for norm() from numpy
 def magnitude(vector):
     return np.linalg.norm(vector)
 

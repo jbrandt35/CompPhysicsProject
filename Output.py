@@ -42,6 +42,9 @@ def meters_to_au(float_num):
 
 
 def plot_orbits(objects):
+
+    plt.figure(figsize=(10, 10))
+
     for object in objects:
         x_coords = OrbitAnalyzer.get_x(object.position_history)/constants.au.value
         y_coords = OrbitAnalyzer.get_y(object.position_history)/constants.au.value
@@ -52,6 +55,7 @@ def plot_orbits(objects):
     axes = plt.gca()
     axes.set_aspect(1)
     plt.title("Simulated Orbital Trajectories (AU)")
+    plt.tight_layout()
     plt.savefig("Figures/trajectory.png")
 
 
@@ -78,12 +82,23 @@ def plot_eccentricity(object, settings):
     plt.savefig("Figures/eccentricity.png")
 
 
-def plot_barycenter(barycenters):
+def plot_energy(energy_list):
 
     plt.close()
-    plt.plot(barycenters)
-    plt.xlabel("Time")
-    plt.ylabel("Magnitude of Barycenters")
-    plt.savefig("Figures/barycenter.png")
+
+    energy_list = np.array(energy_list)
+
+    average_energy = np.average(energy_list)
+
+    percent_deviation = 100 * (energy_list - average_energy) / average_energy
+
+    plt.plot(percent_deviation)
+
+    plt.title("Deviation of Instantaneous Energy from Average (%)")
+    plt.ylabel("Deviation (%)")
+    plt.xlabel("Time (iteration count)")
+    plt.tight_layout()
+    plt.savefig("Figures/Energy.png")
+
 
 

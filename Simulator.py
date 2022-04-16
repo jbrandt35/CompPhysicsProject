@@ -8,7 +8,7 @@ def RunSim(objects, settings):
     dt = settings["dt"]
     start_time = time()
 
-    barycenters = []
+    energy = []
 
     #Note the call for the forces is neccasary to get the first half step velocities.
     update_forces(objects)
@@ -17,9 +17,11 @@ def RunSim(objects, settings):
 
     while time() - start_time < settings["Runtime"]:
 
-        update_position(objects, dt, barycenters)
+        update_position(objects, dt)
         update_forces(objects)
         update_velocity(objects, dt)
+
+        energy.append(get_energy(objects))
 
     print("Simulation ended.")
 
@@ -31,12 +33,11 @@ def RunSim(objects, settings):
 
     Output.plot_eccentricity(objects[0], settings)
 
-    Output.plot_barycenter(barycenters)
+    Output.plot_energy(energy)
 
 
-def update_position(objects, dt, barycenters):
+def update_position(objects, dt):
     barycenter = get_barycenter(objects)
-    barycenters.append(magnitude(barycenter))
     for object in objects:
         #Calculate change in position using the time half-step velocity
         dr = dt * object.hstep_velocity
@@ -56,11 +57,24 @@ def update_velocity(objects, dt):
 
 def update_forces(objects):
     clear_forces(objects)
+    potential_energy = 0.0
     for primary_object in objects:
         for secondary_object in objects[objects.index(primary_object) + 1:]:
             force = gravitational_force(primary_object, secondary_object)
             primary_object.add_force(force)
             secondary_object.add_force(-force)
+
+
+def get_energy(objects):
+    potential_energy = 0.0
+    kinetic_energy = 0.0
+
+    for primary_object in objects:
+        kinetic_energy += primary_object.kinetic_energy
+        for secondary_object in objects[objects.index(primary_object) + 1:]:
+            potential_energy += gravitational_potential_energy(primary_object, secondary_object)
+
+    return kinetic_energy + potential_energy
 
 
 def clear_forces(objects):
