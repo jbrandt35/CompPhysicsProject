@@ -8,3 +8,6 @@ planets = Parser.parse_objects(options)
 print(f"Starting N-body simulator with dt={options['dt']} seconds for {options['Runtime']} seconds...")
 NbodySimulator.RunSim(planets, options)
 
+
+
+

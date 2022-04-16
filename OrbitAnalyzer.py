@@ -1,4 +1,6 @@
 from Equations import *
+import numpy as np
+from scipy.linalg import lu_factor, lu_solve
 
 
 def get_orbit_params(objects):
@@ -6,20 +8,26 @@ def get_orbit_params(objects):
         #extract orbit from object instance
         orbit = object.position_history
         #Project data into ecliptic - remove this line when doing 3D comparisons
-        data = project_into_ecliptic(orbit)
-
-        ellipse = fit_ellipse(data)
-        semi_major_axis, semi_minor_axis, theta, eccentricity = get_ellipse_params(ellipse)
 
         plane = fit_plane(orbit)
         inclination = get_inclination(plane)
+
+        data = []
+        new_basis = gram_schmidt(get_plane_basis(plane))
+        lu, piv = lu_factor(new_basis)
+        for point in orbit:
+            transformed_point = lu_solve((lu, piv), point)
+            data.append(transformed_point)
+
+        data = project_into_ecliptic(data)
+        ellipse = fit_ellipse(data)
+        semi_major_axis, semi_minor_axis, theta, eccentricity = get_ellipse_params(ellipse)
 
         object.semi_major = semi_major_axis
         object.semi_minor = semi_minor_axis
         object.eccentricity = eccentricity
         object.rotation = theta
         object.inclination = inclination
-
 
 
 def get_ellipse_params(coefficients):
@@ -62,6 +70,7 @@ def fit_plane(orbit):
 
     return coefficients
 
+
 def get_inclination(coefficients):
 
     A, B, C = coefficients
@@ -84,46 +93,21 @@ def fit_ellipse(orbit):
 
     return coefficients
 
-def project_point_into_plane(point, coefficients):
 
-    a,b,c = coefficients
-
-    N = np.array([a, b, c])
-    n = N/magnitude(N)
-
-    dist = np.dot(point, n)
-
-    return np.copy(point) - dist * n
+def gram_schmidt(A):
+    Q, R = np.linalg.qr(A)
+    return Q
 
 
-def rotate_orbital_plane_into_ecliptic(plane_coefficients):
+def get_plane_basis(coefficients):
+    A, B, C = coefficients
 
-    #FAST USING ARRAY ARITHMETIC!!!!
+    v1 = np.array([A, B, C])
+    v2 = np.array([-B/A, 1, 0])
+    v3 = np.array([-C/A, 0, 1])
 
-    a, b, c = plane_coefficients
+    return np.column_stack((v2, v3, v1))
 
-    v = np.array([a, b, c])
-
-    u_1 = b / magnitude(v)
-    u_2 = -a / magnitude(v)
-    cos_theta = c / magnitude(v)
-    sin_theta = np.sqrt(a**2 + b**2) / magnitude(v)
-
-    rotation_matrix = np.ones((3,3))
-
-    rotation_matrix[0, 0] = cos_theta + (u_1**2) * (1 - cos_theta)
-    rotation_matrix[0, 1] = u_1 * u_2 * (1 - cos_theta)
-    rotation_matrix[0, 2] = u_2 * sin_theta
-
-    rotation_matrix[1, 0] = u_1 * u_2 * (1 - cos_theta)
-    rotation_matrix[1, 1] = cos_theta + (u_2**2) * (1 - cos_theta)
-    rotation_matrix[1, 2] = -u_1 * sin_theta
-
-    rotation_matrix[2, 0] = -u_2 * sin_theta
-    rotation_matrix[2, 1] = u_1 * sin_theta
-    rotation_matrix[2, 2] = cos_theta
-
-    return np.matmul(rotation_matrix, plane_coefficients)
 
 def get_x(data):
     x = []
@@ -131,17 +115,20 @@ def get_x(data):
         x.append(data[i][0])
     return np.array(x, float)
 
+
 def get_y(data):
     y = []
     for i in range(len(data)):
         y.append(data[i][1])
     return np.array(y, float)
 
+
 def get_z(data):
     z = []
     for i in range(len(data)):
         z.append(data[i][2])
     return np.array(z, float)
+
 
 def split_xyz(data):
     x = get_x(data)
@@ -157,4 +144,12 @@ def project_into_ecliptic(data):
     for i in range(len(data)):
         projection.append(data[i][0:2])
     return projection
+
+
+def get_match(sim_properties, real_properties):
+
+    average_percent_error = np.average(np.abs(sim_properties - real_properties) / real_properties)
+
+    return 1 - average_percent_error
+
 
