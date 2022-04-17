@@ -1,7 +1,7 @@
 {
   "Planets": ["Earth", "Sun", "Mercury", "Venus", "Uranus", "Jupiter", "Saturn", "Neptune"],
   "dt": 3600,
-  "Runtime": 20,
+  "Runtime": 500,
   "Ephemeris Date": "2001-01-10"
 }
 
