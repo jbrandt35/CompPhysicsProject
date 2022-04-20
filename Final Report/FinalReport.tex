@@ -100,6 +100,11 @@ Date: \@date
 
 \section{Introduction}
 
+\subsubsection{History}
+
+\subsubsection{Reference Frames}
+
+\subsubsection{Orbital Elements}
 
 \section{Methods}
 
@@ -117,7 +122,67 @@ Date: \@date
 
 \subsection{Orbit Analyzer}
 
+The job of the orbit analyzer is to take in the position history of each planet and compute the orbital elements. We chose to focus on the inclination, the semi-major axis, and eccentricity (implictly requring the semi-minor axis). This is because these elements focus on the fundamental physical properties of the orbit, while others are more dependent on arbitrary reference directions (inclination depends on the "arbitrary" choice of the ecliptic plane, yet that choice is less arbitrary than the vernal equinox). We believe that with these few elements, we could capture significant and comparable information about the orbits. Of course, there were downsides to this choice. All planets lie roughly in the ecliptic plane, each with an inclination less than 10 degrees, and all orbits are mostly circular (save Mercury with $e=0.2$). This means that in two of the orbital elements, we expect to see barley any deviation, yet the semi-major axis obviously varies widley. It would then perhaps make sense to weight the semi-major axis more highly as a comparative measure: that is the dominant discriminating factor.
 
+\subsubsection{Inclination}
+
+The inclination $\iota$ is the tilt of an orbit with respect to the ecliptic plane; by definition, Earth has $\iota = 0$. The way we computed the inclination first involved fitting a plane to the orbit in question. The goal is to find the coefficients of the form $$Ax + By + Cz = D$$ We can do some simplification given that the Sun is necessarily in the plane of each orbit (Kepler's First Law) and the Sun is (very nearly) at $(0,0,0)$. So we know $D = 0$. Letting $C=1$ without loss of generality simplifies the problem to just finding $A$ and $B$ such that $$Ax + By = -z$$ Each orbit is stored in the form of $n$ coordinates, so constructing $$A = \begin{bmatrix}
+   x_1 & y_1 &} \\
+   \vdots  & \vdots  \\
+   x_n & y_n}
+ \end{bmatrix}\  \enspace    \vec{x}=\begin{bmatrix}A \\ B}\end{bmatrix} \   \enspace   \vec{b} = \begin{bmatrix}z_1 \\ \vdots \\ z_n}\end{bmatrix}$$
+We can solve for $\vec{x}$ using least squares $$A^TA\vec{x}=A^T\vec{b}$$ utilizing numpy's method to obtain the plane. \par
+We know the normal vector to the ecliptic is $n=<0, 0, 1>$ and the normal vector of the orbit's plane is $<A, B, 1>$. The inclination is simply the angle between these two vectors $$\cos(\iota)=\frac{<0, 0, 1> \cdot <A, B, 1>}{\sqrt{(A^2 + B^2 + 1)}}=\frac{1}{\sqrt{(A^2 + B^2 + 1)}}$$
+
+
+\subsubsection{Semi-major Axis}
+
+The semi-major axis for an inclined orbit is difficult to calculate since an ellipse must be fitted to data outside of the $x$-$y$ plane. To make the problem simpler, we first apply a transfermation to the data to put it all in the $x$-$y$ plane. To do this, we re-write each coordinate in terms of a basis where the plane of the orbit is the new $x$-$y$ plane, whose normal vector becomes the new $z$ direction. To accomplish this, we first need the normal vector to the orbital plane (which we have from the previous section), and two linearly independent vectors in the plane of the orbit. Since we have an analytic expression for the plane, this is simple to do analytically as well. All we need to do is to rewrite the plane in vector-parametric form, as the two-dimensional span of the vectors in question, always orthogonal to the normal (which we already know).
+
+$$x = -\frac{B}{A}y - \frac{1}{A}z$$
+
+$$\begin{bmatrix}
+   x \\
+   y  \\
+   z}
+ \end{bmatrix} \cdot \vec{n}  = 0 \implies \begin{bmatrix}
+    -\frac{B}{A}y - \frac{1}{A}z \\
+    y  \\
+    z}
+  \end{bmatrix} \cdot \vec{n} = 0 \implies \left(\begin{bmatrix}
+     -\frac{B}{A} \\
+     1  \\
+     0}
+   \end{bmatrix}y +  \begin{bmatrix}
+      -\frac{1}{A} \\
+      0  \\
+      1}
+    \end{bmatrix}z\right)\cdot \vec{n} = 0 $$
+
+Which gives our new basis as the column space of the transition matrix $$\begin{bmatrix}
+   -\frac{B}{A} & -\frac{1}{A}} & A \\
+   1 & 0 & B  \\
+   0 & 1 & 1}
+ \end{bmatrix}$$
+
+Since it is best practice to use an orthonormal basis, we did this by applying the $QR$ decomposition to the transition matrix, where the column space of $Q$ is an orthonormal basis of the column space of the transition matrix.
+
+$$\begin{bmatrix}
+   -\frac{B}{A} & -\frac{1}{A}} & A \\
+   1 & 0 & B  \\
+   0 & 1 & 1}
+ \end{bmatrix} = QR$$
+
+With $Q$ being our orthonormal transition matrix.
+
+The coordinates in the new basis, $\vec{x}_{\text{new}}$ is the solution of $$Q\vec{x}_{\text{new}} = \vec{x}_{\text{old}}$$
+since we're expecting to transition potentially millions of points, we need a fast way of solving this system repeatedly for each new $\vec{x}_{\text{new}}$. The best way to do this is to $LU$ decompose $Q$, fulfilling the consistent row operations to create two triangular matricies which can be easily solved using Scipy's LU-Solver. So we solved $$LU\vec{x}_{\text{new}} = \vec{x}_{\text{old}}$$ for each orbit point. \par
+With that done, we can know analyze the orbit within its own plane. The general equation of an ellipse $$Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$$ can be simplified without loss of generality to $$Cy^2 + Bxy + Dx + Ey + G = -x^2$$. We solve for these coefficients the same way as before, using least squares. With these in hand, we can solve for the semi-major axis $a$ and semi-minor axis $b$ in terms of these coefficients according to $$a,b = \frac{-\sqrt{2(AE^2 + CD^2 -BDE + (B^2 - 4AC)F((A+C)\pm\sqrt{(A-C)^2 + B^2}))}}{B^2 - 4AC}$$
+
+
+\subsubsection{Eccentricity}
+
+The eccentricity is easily calculated with the standard formula $$e=\sqrt{1-\frac{b^2}{a^2}}$$
 
 \section{Results}
 
