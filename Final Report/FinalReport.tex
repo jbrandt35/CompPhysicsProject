@@ -102,6 +102,14 @@ Date: \@date
 
 \subsubsection{History}
 
+In 1609, Johannes Kepler formulated his three laws of orbital motion after observing the trajectory of Mars in the night-sky. His laws determine the orbits of two interacting celestial objects, allowing one to predict the size, shape, and orientation of the orbits. It wasn't until 1687 when Isaac Newton created his Universal Law of Gravity that it was understood the exact mechanism by which orbits are formed. Newton's Law, $$\vec{F}_g = \frac{Gm_1m_2}{r^2}}\hat{r}$$ now forms the basis for the analysis and prediction of orbits. With the advent of this law came the realization, which Newton made himself, that the orbits of more than two bodies is a deterministic, yet chaotic, phenomenon: there is no equivalent for Kepler's Laws for three or more bodies. This "Three-body Problem" ultimatley became the foundation for Chaos Theory.\par
+There is a bright-side however. Since gravity interacts between every pair of objects, the motion of a particular object carries with it information about the distance and mass of other objects. In this way, if you know the propeties of each body graviationally interacting, you can solve Newton's Laws for each, and numerically determine its orbit. \par
+This indeed became an active area of astronomical research in the mid-1800s. Ever since Uranus was observationally discovered in 1781 by William Herschel, its position in the night-sky was tracked. Astronomers John Couch Adams and Urbain Le Verrier noticed slight deviations in the orbit of Uranus: perturbations not predicted by interacting with any known planets. Using these perturbations, both astronomers calculated where a new planet would have to be to cause the observed orbit. Within the first night of looking, equipped with Le Verrier's prediction, German astronmer Johann Galle saw Neptune through a telescope for the first time. \par
+Ever since that first purposeful discovery of a planet, astronomers have been using this method to detect planets, in our own Solar System and in others. In fact, many believe that there is a yet undiscovered "Planet X" outside of the Kuiper Belt beyond apparent sight. They cite unaccounted perturbations in the known planets.
+
+\subsubsection{Goal}
+
+
 \subsubsection{Reference Frames}
 
 \subsubsection{Orbital Elements}
@@ -137,7 +145,7 @@ We know the normal vector to the ecliptic is $n=<0, 0, 1>$ and the normal vector
 
 \subsubsection{Semi-major Axis}
 
-The semi-major axis for an inclined orbit is difficult to calculate since an ellipse must be fitted to data outside of the $x$-$y$ plane. To make the problem simpler, we first apply a transfermation to the data to put it all in the $x$-$y$ plane. To do this, we re-write each coordinate in terms of a basis where the plane of the orbit is the new $x$-$y$ plane, whose normal vector becomes the new $z$ direction. To accomplish this, we first need the normal vector to the orbital plane (which we have from the previous section), and two linearly independent vectors in the plane of the orbit. Since we have an analytic expression for the plane, this is simple to do analytically as well. All we need to do is to rewrite the plane in vector-parametric form, as the two-dimensional span of the vectors in question, always orthogonal to the normal (which we already know).
+The semi-major axis for an inclined orbit is difficult to calculate since an ellipse must be fitted to data outside of the $x$-$y$ plane. To make the problem simpler, we first apply a transformation to the data to put it all in the $x$-$y$ plane. To do this, we re-write each coordinate in terms of a basis where the plane of the orbit is the new $x$-$y$ plane, whose normal vector becomes the new $z$ direction. To accomplish this, we first need the normal vector to the orbital plane (which we have from the previous section), and two linearly independent vectors in the plane of the orbit. Since we have an analytic expression for the plane, this is simple to do analytically as well. All we need to do is to rewrite the plane in vector-parametric form, as the two-dimensional span of the vectors in question, always orthogonal to the normal (which we already know).
 
 $$x = -\frac{B}{A}y - \frac{1}{A}z$$
 
@@ -176,7 +184,7 @@ $$\begin{bmatrix}
 With $Q$ being our orthonormal transition matrix.
 
 The coordinates in the new basis, $\vec{x}_{\text{new}}$ is the solution of $$Q\vec{x}_{\text{new}} = \vec{x}_{\text{old}}$$
-since we're expecting to transition potentially millions of points, we need a fast way of solving this system repeatedly for each new $\vec{x}_{\text{new}}$. The best way to do this is to $LU$ decompose $Q$, fulfilling the consistent row operations to create two triangular matricies which can be easily solved using Scipy's LU-Solver. So we solved $$LU\vec{x}_{\text{new}} = \vec{x}_{\text{old}}$$ for each orbit point. \par
+since we're expecting to transition potentially millions of points, we need a fast way of solving this system repeatedly for each new $\vec{x}_{\text{new}}$ The best way to do this is to $LU$ decompose $Q$, fulfilling the consistent row operations to create two triangular matricies which can be easily solved using Scipy's LU-Solver. So we solved $$LU\vec{x}_{\text{new}} = \vec{x}_{\text{old}}$$ for each orbit point. \par
 With that done, we can know analyze the orbit within its own plane. The general equation of an ellipse $$Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$$ can be simplified without loss of generality to $$Cy^2 + Bxy + Dx + Ey + G = -x^2$$. We solve for these coefficients the same way as before, using least squares. With these in hand, we can solve for the semi-major axis $a$ and semi-minor axis $b$ in terms of these coefficients according to $$a,b = \frac{-\sqrt{2(AE^2 + CD^2 -BDE + (B^2 - 4AC)F((A+C)\pm\sqrt{(A-C)^2 + B^2}))}}{B^2 - 4AC}$$
 
 
@@ -188,7 +196,7 @@ The eccentricity is easily calculated with the standard formula $$e=\sqrt{1-\fra
 
 \subsection{Errors}
 
-\subsubsection{PACE}
+\subsection{PACE}
 
 
 \section{Conclusion}
