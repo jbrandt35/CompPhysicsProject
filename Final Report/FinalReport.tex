@@ -96,7 +96,7 @@ Date: \@date
 
 
 \begin{abstract}
-   [Abstract]
+   In this paper, we outline our code to estimate the properties of undiscovered planets by using their perterbative influence of known orbits. Using the Verlet method, we iterativley update a set of Body objects correspoding to celestial objects with new forces, velocities and positions. Each object's orbit is then analyzed to find values for its semi-major axis, eccentricity, and inclination to the ecliptic. We are able to succesfully recover eccentricities within 8.7\% excluding an outlier, semi-major axes within 0.04\% and inclinations within 0.87\% based on a four hour PACE run of our code. In our current implementation, we do not believe we have achieved the accuracy required to distinguish between error and perturbation. However, we have laid-out the first steps in the process.
 \end{abstract}
 
 \section{Introduction}
@@ -114,11 +114,31 @@ The goal of our project is to computationally implement this process. Taking in 
 
 \subsubsection{Reference Frames}
 
-Planetary systems in general tend to form within a plane, which in our System is called the ecliptic. More specifically, the ecliptic is the plane of the Earth-Sun orbit. As a beggining, we are deciding to begin the project analyzing the Solar System, and all subsequent discussion will be based upon that fact. \par
+Planetary systems in general tend to form within a plane, which in our System is called the ecliptic. More specifically, the ecliptic is the plane of the Earth-Sun orbit. As a beggining, we are analyzing the Solar System, and all subsequent discussion will be based upon that fact. \par
 The ecliptic, as we will treat it, is a stationary frame: the frame in which the Earth and Sun lie in at initialization. During our simulation, we track all positions with respect to the position at which the Sun was initialized. But that is not the frame where orbital analysis typically takes place. The barycentric frame is a frame whose origin follows the center of mass of the Solar System. In order to analyze our orbits, we store the positions in this frame.
 
 \subsubsection{Orbital Elements}
 \label{sec:elements}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.4]{OrbitalElements.png}
+  \caption{A diagram of the orbital elements. From \cite{orbital_elements}}
+  \label{fig:orbital_elements}
+\end{figure}
+
+Orbital elements are quantities which define the shape, size, and orientation of an orbit. Most of the elements are shown in \ref{fig:orbital_elements}, there is additionally the semi-major axis and the eccentricity. To be clear, they are:
+
+\begin{itemize}
+  \item Inclination ($\iota$) - the angle between the orbit and the ecliptic.
+  \item Semi-major axis ($a$) - half of the length of the longest diameter of the ellipse.
+  \item Eccentricity ($e$) - a number ranging from $0$ to $1$ quantifying how round the orbit is. $e=0$ is a circle, and $e=1$ is a line.
+  \item Longitude of the Ascending Node ($\Omega$) - The angle from some reference direction to where the body passes through the ecliptic upward (the ascending node).
+  \item Argument of Periapsis ($\omega$) - The angle between the ascending node and the periapsis (the point when the object is closest to what it is orbiting)
+\end{itemize}
+
+
+We decided to focus on the semi-major axis, eccentricity, and inclination. Those are enough to describe the shape and size of the orbit, and give a measure of how inclined it is to the ecliptic. The longitude of the ascending node and the argument of periapsis would give additional information about the orientation of the orbit and where periapsis occurs.
 
 \section{Methods}
 
@@ -154,7 +174,7 @@ The planet files contain information on the stars/planets you want to use during
 The "\<Find\>" keyword is used when you're using a real planet which carries a unique "Horizon ID". Alternativley, you can manually enter information to make custom planets and stars. \par
 The configuration file tells the code which planets to read in, and for each one it converts the information in the JSON file into an instance of our "Body" class. These bodies are manipulated by the Simulator to carry out the simulation.
 
-\subsubsection{Horizons API}
+\subsubsection{Horizons API \cite{Horizons}}
 \label{sec:API}
 
 [Talk about API]
@@ -246,5 +266,8 @@ The eccentricity is easily calculated with the standard formula $$e=\sqrt{1-\fra
 \section{Conclusion}
 
 [Conclusion]
+
+\bibliography{bibliography}
+\bibliographystyle{plainurl}
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.1)  24 APR 2022 14:25
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.1)  24 APR 2022 15:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -605,28 +605,34 @@ deleted material, e.g., by typing `I$}'.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.117 ...ussion will be based upon that fact. \par
-                                                   [1]
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 132.
+l.114 
+       [1]
+<OrbitalElements.png, id=103, 582.175pt x 524.96124pt>
+File: OrbitalElements.png Graphic file (type png)
+<use OrbitalElements.png>
+Package pdftex.def Info: OrbitalElements.png  used on input line 125.
+(pdftex.def)             Requested size: 232.86588pt x 209.98077pt.
+ [2 <./OrbitalElements.png>]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 152.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 132.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 152.
 
-Overfull \hbox (40.53088pt too wide) in paragraph at lines 133--134
+Overfull \hbox (40.53088pt too wide) in paragraph at lines 153--154
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 147.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 167.
 (/usr/local/texlive/2021/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 147.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 167.
 
-./FinalReport.tex:154: Undefined control sequence.
-l.154 The "\<
+./FinalReport.tex:174: Undefined control sequence.
+l.174 The "\<
              Find\>" keyword is used when you're using a real planet which c...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -634,11 +640,15 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
-[2] [3]
-./FinalReport.tex:178: Extra }, or forgotten $.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\@ifnextchar' on input line 177.
+
+[3] [4]
+./FinalReport.tex:198: Extra }, or forgotten $.
 <recently read> }
                  
-l.178    x_1 & y_1 &}
+l.198    x_1 & y_1 &}
                       \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -646,8 +656,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:180: Extra }, or forgotten $.
-l.180    x_n & y_n}
+./FinalReport.tex:200: Extra }, or forgotten $.
+l.200    x_n & y_n}
                    
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -655,8 +665,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:181: Extra }, or forgotten $.
-l.181 ...enspace    \vec{x}=\begin{bmatrix}A \\ B}
+./FinalReport.tex:201: Extra }, or forgotten $.
+l.201 ...enspace    \vec{x}=\begin{bmatrix}A \\ B}
                                                   \end{bmatrix} \   \enspace...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -664,8 +674,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:181: Extra }, or forgotten $.
-l.181 ...b} = \begin{bmatrix}z_1 \\ \vdots \\ z_n}
+./FinalReport.tex:201: Extra }, or forgotten $.
+l.201 ...b} = \begin{bmatrix}z_1 \\ \vdots \\ z_n}
                                                   \end{bmatrix}$$
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -673,8 +683,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:195: Extra }, or forgotten $.
-l.195    z}
+./FinalReport.tex:215: Extra }, or forgotten $.
+l.215    z}
            
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -682,8 +692,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:199: Extra }, or forgotten $.
-l.199     z}
+./FinalReport.tex:219: Extra }, or forgotten $.
+l.219     z}
             
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -691,8 +701,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:203: Extra }, or forgotten $.
-l.203      0}
+./FinalReport.tex:223: Extra }, or forgotten $.
+l.223      0}
              
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -700,8 +710,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:207: Extra }, or forgotten $.
-l.207       1}
+./FinalReport.tex:227: Extra }, or forgotten $.
+l.227       1}
               
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -709,8 +719,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:211: Extra }, or forgotten $.
-l.211    -\frac{B}{A} & -\frac{1}{A}}
+./FinalReport.tex:231: Extra }, or forgotten $.
+l.231    -\frac{B}{A} & -\frac{1}{A}}
                                       & A \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -718,8 +728,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:213: Extra }, or forgotten $.
-l.213    0 & 1 & 1}
+./FinalReport.tex:233: Extra }, or forgotten $.
+l.233    0 & 1 & 1}
                    
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -727,8 +737,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:219: Extra }, or forgotten $.
-l.219    -\frac{B}{A} & -\frac{1}{A}}
+./FinalReport.tex:239: Extra }, or forgotten $.
+l.239    -\frac{B}{A} & -\frac{1}{A}}
                                       & A \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -736,8 +746,8 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:221: Extra }, or forgotten $.
-l.221    0 & 1 & 1}
+./FinalReport.tex:241: Extra }, or forgotten $.
+l.241    0 & 1 & 1}
                    
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -745,24 +755,24 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-[4] [5] [6] (./FinalReport.aux)
+[5] (./FinalReport.bbl [6]) [7] (./FinalReport.aux)
 Package rerunfilecheck Info: File `FinalReport.out' has not changed.
-(rerunfilecheck)             Checksum: 4D1D4CDE91E11E4D6A1D11E6CFE3B6CF;2371.
+(rerunfilecheck)             Checksum: 9583A4F316ECE75CFCD2B5D07D2F2DEF;2419.
  ) 
 Here is how much of TeX's memory you used:
- 14472 strings out of 478994
- 218090 string characters out of 5858185
+ 14503 strings out of 478994
+ 218578 string characters out of 5858185
  703933 words of memory out of 5000000
- 31686 multiletter control sequences out of 15000+600000
- 412394 words of font info for 59 fonts, out of 8000000 for 9000
+ 31706 multiletter control sequences out of 15000+600000
+ 412910 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,8n,80p,1137b,1245s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sf
-rm1200.pfb>
-Output written on FinalReport.pdf (7 pages, 201840 bytes).
+{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmtt12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on FinalReport.pdf (8 pages, 266809 bytes).
 PDF statistics:
- 198 PDF objects out of 1000 (max. 8388607)
- 174 compressed objects within 2 object streams
- 43 named destinations out of 1000 (max. 500000)
- 166 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 220 PDF objects out of 1000 (max. 8388607)
+ 191 compressed objects within 2 object streams
+ 48 named destinations out of 1000 (max. 500000)
+ 171 words of extra memory for PDF output out of 10000 (max. 10000000)
 
