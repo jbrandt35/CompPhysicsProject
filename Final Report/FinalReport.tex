@@ -11,6 +11,7 @@
 \usepackage{cite} % takes care of citations
 \usepackage[final]{hyperref} % adds hyper links inside the generated PDF file
 \usepackage{placeins}
+\usepackage{listings}
 
 % NECESSARY FOR INCREASED CUSTOMIZATION PACKAGES
 \usepackage{newfloat} % for defining new float in environments (e.g: figure and tables are floats)
@@ -95,7 +96,7 @@ Date: \@date
 
 
 \begin{abstract}
-   Abstract
+   [Abstract]
 \end{abstract}
 
 \section{Introduction}
@@ -109,10 +110,15 @@ Ever since that first purposeful discovery of a planet, astronomers have been us
 
 \subsubsection{Goal}
 
+The goal of our project is to computationally implement this process. Taking in a perturbed orbit, can we give an accurate suggestion of the properties of the planet doing the perturbing? The idea is to simulate a set of known planets and stars, each time making a guess as to where and how large a new planet would need to be. Evolving the system over many years, we compute properties (See \ref{sec:elements}) of the orbit, and compare them to the observed (perturbed) properties. In a sort of Bayesian analysis, if our guessed planet gives an orbit that closley matches the perturbed orbit, we can say that the guessed planet has a high likliehood of having the properties of a real planet doing the perturbing.
 
 \subsubsection{Reference Frames}
 
+Planetary systems in general tend to form within a plane, which in our System is called the ecliptic. More specifically, the ecliptic is the plane of the Earth-Sun orbit. As a beggining, we are deciding to begin the project analyzing the Solar System, and all subsequent discussion will be based upon that fact. \par
+The ecliptic, as we will treat it, is a stationary frame: the frame in which the Earth and Sun lie in at initialization. During our simulation, we track all positions with respect to the position at which the Sun was initialized. But that is not the frame where orbital analysis typically takes place. The barycentric frame is a frame whose origin follows the center of mass of the Solar System. In order to analyze our orbits, we store the positions in this frame.
+
 \subsubsection{Orbital Elements}
+\label{sec:elements}
 
 \section{Methods}
 
@@ -120,13 +126,47 @@ Ever since that first purposeful discovery of a planet, astronomers have been us
 
 \subsubsection{JSON Files}
 
-\subsubsection{Horizons API}
+The data-entry to our code is done through Javascript Object Notation (JSON) files. There are two types of JSON files that we used: a configuration file, and a planet file. An example configuration file is shown below
 
+\begin{lstlisting}
+{
+  "Planets": ["Earth", "Sun", "Mercury", "Venus", "Uranus", "Jupiter",
+  "Saturn", "Neptune", "Mars"],
+  "dt": 3600,
+  "Runtime": 60,
+  "Ephemeris Date": "2001-01-10"
+}
+\end{lstlisting}
+
+This contains all of the information needed to run a simulation. For each planet, the code will look for the corresponding planet file. $dt$ represents the length of the time-step to use, the Runtime is how many real seconds to fun for, and the Ephermeris Date is which date you want to initialize the Solar System at (See \ref{sec:API})). \par
+The planet files contain information on the stars/planets you want to use during the simulation. Below is Earth's
+
+\begin{lstlisting}
+{
+  "name": "earth",
+  "mass": "<Find>",
+  "iposition": "<Find>",
+  "ivelocity": "<Find>",
+  "Horizon ID": 399
+}
+\end{lstlisting}
+
+The "\<Find\>" keyword is used when you're using a real planet which carries a unique "Horizon ID". Alternativley, you can manually enter information to make custom planets and stars. \par
+The configuration file tells the code which planets to read in, and for each one it converts the information in the JSON file into an instance of our "Body" class. These bodies are manipulated by the Simulator to carry out the simulation.
+
+\subsubsection{Horizons API}
+\label{sec:API}
+
+[Talk about API]
+
+\subsubsection{The Body Class}
+Once all of the information about an object is known from either JSON data entry or the Horizons API, the code creates an instance of the Body class for each object participating in the simulation. Bodies have attributes including: mass, position, velocity, net force, kinetic energy which are used during the simulation; position and velocity histories which are lists storing all of the past positions of that body in the barycentric frame for later use; and semimajor axis, semiminor axis, inclination, and eccentricity which are set after the orbit is analyzed. Their methods include: adding force, removing force, and setting position \& velocity. Body objects follow through each step of the code: created at the beggining, manipulated during the simulation, and analyzed after; the code takes in the raw material and produces the product in the form of Body classes.
 
 \subsection{Simulating Orbits}
+[Talk about code]
 
 \subsubsection{Verlet Method}
-
+[Talk about verlet method]
 
 \subsection{Orbit Analyzer}
 
@@ -185,22 +225,26 @@ With $Q$ being our orthonormal transition matrix.
 
 The coordinates in the new basis, $\vec{x}_{\text{new}}$ is the solution of $$Q\vec{x}_{\text{new}} = \vec{x}_{\text{old}}$$
 since we're expecting to transition potentially millions of points, we need a fast way of solving this system repeatedly for each new $\vec{x}_{\text{new}}$ The best way to do this is to $LU$ decompose $Q$, fulfilling the consistent row operations to create two triangular matricies which can be easily solved using Scipy's LU-Solver. So we solved $$LU\vec{x}_{\text{new}} = \vec{x}_{\text{old}}$$ for each orbit point. \par
-With that done, we can know analyze the orbit within its own plane. The general equation of an ellipse $$Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$$ can be simplified without loss of generality to $$Cy^2 + Bxy + Dx + Ey + G = -x^2$$. We solve for these coefficients the same way as before, using least squares. With these in hand, we can solve for the semi-major axis $a$ and semi-minor axis $b$ in terms of these coefficients according to $$a,b = \frac{-\sqrt{2(AE^2 + CD^2 -BDE + (B^2 - 4AC)F((A+C)\pm\sqrt{(A-C)^2 + B^2}))}}{B^2 - 4AC}$$
+With that done, we can know analyze the orbit within its own plane. The general equation of an ellipse $$Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$$ can be simplified without loss of generality to $$Cy^2 + Bxy + Dx + Ey + G = -x^2$$ We solve for these coefficients the same way as before, using least squares. With these in hand, we can solve for the semi-major axis $a$ and semi-minor axis $b$ in terms of these coefficients according to $$a,b = \frac{-\sqrt{2(AE^2 + CD^2 -BDE + (B^2 - 4AC)F((A+C)\pm\sqrt{(A-C)^2 + B^2}))}}{B^2 - 4AC}$$
 
 
 \subsubsection{Eccentricity}
 
 The eccentricity is easily calculated with the standard formula $$e=\sqrt{1-\frac{b^2}{a^2}}$$
 
+\subsection{Data Output}
+[Output files]
+
 \section{Results}
+
+[Results]
 
 \subsection{Errors}
 
-\subsection{PACE}
-
+[Talk about eccentricity errors]
 
 \section{Conclusion}
 
-
+[Conclusion]
 
 \end{document}

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e5adc30e-9281-4dd1-81a6-85812d14514c" name="Changes" comment="Orbit Analyzer Section">
-      <change afterPath="$PROJECT_DIR$/Final Report/FinalReport.aux" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Final Report/FinalReport.fdb_latexmk" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Final Report/FinalReport.fls" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Final Report/FinalReport.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Final Report/FinalReport.out" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Final Report/FinalReport.synctex.gz" afterDir="false" />
+    <list default="true" id="e5adc30e-9281-4dd1-81a6-85812d14514c" name="Changes" comment="History content">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Report/FinalReport.aux" beforeDir="false" afterPath="$PROJECT_DIR$/Final Report/FinalReport.aux" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Report/FinalReport.fdb_latexmk" beforeDir="false" afterPath="$PROJECT_DIR$/Final Report/FinalReport.fdb_latexmk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Report/FinalReport.fls" beforeDir="false" afterPath="$PROJECT_DIR$/Final Report/FinalReport.fls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Report/FinalReport.log" beforeDir="false" afterPath="$PROJECT_DIR$/Final Report/FinalReport.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Report/FinalReport.out" beforeDir="false" afterPath="$PROJECT_DIR$/Final Report/FinalReport.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Report/FinalReport.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Final Report/FinalReport.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Report/FinalReport.synctex.gz" beforeDir="false" afterPath="$PROJECT_DIR$/Final Report/FinalReport.synctex.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Final Report/FinalReport.tex" beforeDir="false" afterPath="$PROJECT_DIR$/Final Report/FinalReport.tex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +114,9 @@
       <workItem from="1649894952092" duration="30599000" />
       <workItem from="1650490054252" duration="239000" />
       <workItem from="1650490348565" duration="665000" />
+      <workItem from="1650640328624" duration="70000" />
+      <workItem from="1650736316692" duration="15000" />
+      <workItem from="1650823718745" duration="409000" />
     </task>
     <task id="LOCAL-00001" summary="Changing center from barycenter to Sun">
       <created>1649016518084</created>
@@ -203,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650493979259</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Orbit Analyzer Section">
+      <created>1650640334579</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1650640334580</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
