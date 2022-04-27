@@ -177,7 +177,15 @@ The configuration file tells the code which planets to read in, and for each one
 \subsubsection{Horizons API \cite{Horizons}}
 \label{sec:API}
 
-[Talk about API]
+Parameter values for each instance of the body class are pulled from JPL's Horizon's API. As with any API, the request is submitted by constructing a "key" URL that contains where the information is being pulled from, and the parameters of the request itself. For the Horizon API call, the commands that are manually inputed are a PlanetID, which specifies which planet the API should pull data for, and the CENTER command, which sets the reference frame with which to measure position and velocity values. Also included in the URL request are commands that specify the format of the return file, the data type desired for the return data values, and the time for which the API should pull data at. The parameters themselves are stored in the object JSON files, and are pulled from there each times the API is called. The full construction of the URL in Python 3 is shown below.
+
+\begin{verbatim}
+    url = "https://ssd.jpl.nasa.gov/api/horizons.api?"
+    url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@0'"
+    url += "&COMMAND='{}'&START_TIME='{}'".format(planetID, start_time, stop_time)
+\end{verbatim}
+
+Using this constructed URL, our program makes the API call, and returns a JSON file which contains a string with the request settings, and a string of the requested data. This string data is then parsed through using string methods to find the initial position and velocity, as well as the mass. Each objects JSON file is then updated with this data to then later be used in the simulator module.
 
 \subsubsection{The Body Class}
 Once all of the information about an object is known from either JSON data entry or the Horizons API, the code creates an instance of the Body class for each object participating in the simulation. Bodies have attributes including: mass, position, velocity, net force, kinetic energy which are used during the simulation; position and velocity histories which are lists storing all of the past positions of that body in the barycentric frame for later use; and semimajor axis, semiminor axis, inclination, and eccentricity which are set after the orbit is analyzed. Their methods include: adding force, removing force, and setting position \& velocity. Body objects follow through each step of the code: created at the beggining, manipulated during the simulation, and analyzed after; the code takes in the raw material and produces the product in the form of Body classes.
@@ -186,7 +194,24 @@ Once all of the information about an object is known from either JSON data entry
 [Talk about code]
 
 \subsubsection{Verlet Method}
-[Talk about verlet method]
+Very early on in the drafting process, it was determined that our code would be run for an extended runtime, potentially even thousands of years of simulated time. For that reason, we replaced the Euler Method in our code to implement the Verlet Method instead. This addressed several issues that we had in the earlier drafts of our program. With the Euler Method, every planet was slowly drifting out of orbit, spiraling away from the Sun. In many iterations, Mercury was eventually even slung out of orbit. To prevent this, and this build a simulator that maintained orbits that were stable in time, we replaced the Euler Method with the Verlet Method, which makes use of parallel velocity values at half-integer time steps rather than at full time steps to maintain a solution that avoids accumulating errors and is stable in time. The governing equations for this method are shown below.
+
+\begin{equation}
+\centering
+x(t+h)=x(t)+hv(t+\frac{1}{2}h)
+\end{equation}
+
+\begin{equation}
+\centering
+k=hf(x(t+h),t+h)
+\end{equation}
+
+\begin{equation}
+\centering
+v(t+\frac{3}{2}h)=v(t+\frac{1}{2}h) + k
+\end{equation}
+
+We implement the Verlet Method computationally by storing an attribute in each object instance for the velocity at half time-step intervals. Since the values we want to actually store for velocity in the object velocity history attribute are at full time steps, the simulator module first updates the position value for each planet using the velocity value that is a half time-step ahead of the position value. The velocity at that full time-step is then calculated from the half time-step velocity using a Euler approximation, and stored in the velocity history object attribute. In essence, while the stored velocity values for each iteration are calculated using a Euler approximation, the generated information is calculated using the Verlet Method, and so energy is conserved over time. The accuracy of this method over time is demonstrated in the Results section.
 
 \subsection{Orbit Analyzer}
 
@@ -253,7 +278,30 @@ With that done, we can know analyze the orbit within its own plane. The general 
 The eccentricity is easily calculated with the standard formula $$e=\sqrt{1-\frac{b^2}{a^2}}$$
 
 \subsection{Data Output}
-[Output files]
+Having generated the orbital parameters, the program then creates an output text file for each body object with a file name format of 
+
+\begin{verbatim}
+    object.name + "_output.txt"
+\end{verbatim}
+
+These output files, after there creation, are saved into an "OutputFiles" Folder within the project folder. To this file, the name, mass, and orbital parameters are written, followed by the listing of position history in AU. A sample file output is shown below.
+
+\begin{verbatim}
+    ----------------------------------------
+    Object: Jupiter
+    Mass: 1.89818722e27 kg
+    Semi-Major Axis: 5.197611904 AU
+    Semi-Minor Axis: 5.191180274 AU
+    Eccentricity: 0.0497323818
+    Rotation: -87.7953924 degrees
+    Inclination: 1.3033555432 degrees
+    ----------------------------------------
+    Position History (x,y,z) AU
+    X = 1.728  Y = 4.737  Z = -0.058
+    X = 1.725  Y = 4.738  Z = -0.058
+\end{verbatim}
+
+The output module of our program also generates two graphs. The first is a set of two trajectory plots, the first including all planets, and the second only the first four planets from the Sun. These plots are created from the position history array attribute of each body object. The second graph is a plot of the energy deviations from the energy average over a specified period, visualized for the total run-time of our simulator. Both graphs are show below in the Results section.
 
 \section{Results}
 
@@ -271,3 +319,4 @@ The eccentricity is easily calculated with the standard formula $$e=\sqrt{1-\fra
 \bibliographystyle{plainurl}
 
 \end{document}
+
