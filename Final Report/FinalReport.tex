@@ -188,13 +188,11 @@ Parameter values for each instance of the body class are pulled from JPL's Horiz
 Using this constructed URL, our program makes the API call, and returns a JSON file which contains a string with the request settings, and a string of the requested data. This string data is then parsed through using string methods to find the initial position and velocity, as well as the mass. Each objects JSON file is then updated with this data to then later be used in the simulator module.
 
 \subsubsection{The Body Class}
-Once all of the information about an object is known from either JSON data entry or the Horizons API, the code creates an instance of the Body class for each object participating in the simulation. Bodies have attributes including: mass, position, velocity, net force, kinetic energy which are used during the simulation; position and velocity histories which are lists storing all of the past positions of that body in the barycentric frame for later use; and semimajor axis, semiminor axis, inclination, and eccentricity which are set after the orbit is analyzed. Their methods include: adding force, removing force, and setting position \& velocity. Body objects follow through each step of the code: created at the beggining, manipulated during the simulation, and analyzed after; the code takes in the raw material and produces the product in the form of Body classes.
+Once all of the information about an object is known from either JSON data entry or the Horizons API, the code creates an instance of the Body class for each object participating in the simulation. Bodies have attributes including: mass, position, velocity, net force, kinetic energy which are used during the simulation; position and velocity histories which are lists storing all of the past positions of that body in the barycentric frame for later use; and semi-major axis, semi-minor axis, inclination, and eccentricity which are set after the orbit is analyzed. Their methods include: adding force, removing force, and setting position \& velocity. Body objects follow through each step of the code: created at the beginning, manipulated during the simulation, and analyzed after; the code takes in the raw material and produces the product in the form of Body classes.
 
-\subsection{Simulating Orbits}
-[Talk about code]
 
 \subsubsection{Verlet Method}
-Very early on in the drafting process, it was determined that our code would be run for an extended runtime, potentially even thousands of years of simulated time. For that reason, we replaced the Euler Method in our code to implement the Verlet Method instead. This addressed several issues that we had in the earlier drafts of our program. With the Euler Method, every planet was slowly drifting out of orbit, spiraling away from the Sun. In many iterations, Mercury was eventually even slung out of orbit. To prevent this, and this build a simulator that maintained orbits that were stable in time, we replaced the Euler Method with the Verlet Method, which makes use of parallel velocity values at half-integer time steps rather than at full time steps to maintain a solution that avoids accumulating errors and is stable in time. The governing equations for this method are shown below.
+Very early on in the drafting process, it was determined that our code would be run for an extended run-time, potentially even thousands of years of simulated time. For that reason, we replaced the Euler Method in our code to implement the Verlet Method instead. This addressed several issues that we had in the earlier drafts of our program. With the Euler Method, every planet was slowly drifting out of orbit, spiraling away from the Sun. In many iterations, Mercury was eventually even slung out of orbit. To prevent this, and this build a simulator that maintained orbits that were stable in time, we replaced the Euler Method with the Verlet Method, which makes use of parallel velocity values at half-integer time steps rather than at full time steps to maintain a solution that avoids accumulating errors and is stable in time. The governing equations for this method are shown below.
 
 \begin{equation}
 \centering
@@ -305,15 +303,111 @@ The output module of our program also generates two graphs. The first is a set o
 
 \section{Results}
 
-[Results]
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Table 1:} Summary of Semi-Major Values}\\
+\hline
+Planet & Simulated Value & Accepted Value & Error(\%)\\
+\hline
+Mercury & 0.387 & 0.387 & 0\%\\
+\hline
+Venus & 0.723 & 0.723 & 0\%\\
+\hline
+Earth & 0.999 & 1.000 & 0.1\%\\
+\hline
+Mars & 1.523 & 1.524 & 0.06\%\\
+\hline
+Jupiter & 5.199 & 5.203 & 0.07\%\\
+\hline
+Saturn & 9.541 & 9.537 & 0.04\%\\
+\hline
+Uranus & 19.188 & 19.189 & 0.005\%\\
+\hline
+Neptune & 30.080 & 30.070 & 0.03\%\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Table 2:} Summary of Semi-Minor Values}\\
+\hline
+Planet & Simulated Value & Accepted Value & Error(\%)\\
+\hline
+Mercury & 0.379 & 0.379 & 0\%\\
+\hline
+Venus & 0.723 & 0.723 & 0\%\\
+\hline
+Earth & 0.999 & 1.000 & 0.1\%\\
+\hline
+Mars & 1.517 & 1.517 & 0\%\\
+\hline
+Jupiter & 5.192 & 5.198 & 0.11\%\\
+\hline
+Saturn & 9.527 & 9.567 & 0.41\%\\
+\hline
+Uranus & 19.167 & 19.198 & 0.16\%\\
+\hline
+Neptune & 30.077 & 30.109 & 0.10\%\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{\textbf{Table 3:} Summary of Eccentricity Values}\\
+\hline
+Planet & Simulated Value & Accepted Value & Error(\%)\\
+\hline
+Mercury & 0.203 & 0.206 & 1.45\%\\
+\hline
+Venus & 0.024 & 0.007 & 242.85\%\\
+\hline
+Earth & 0.022 & 0.017 & 29.41\%\\
+\hline
+Mars & 0.094 & 0.094 & 0\%\\
+\hline
+Jupiter & 0.049 & 0.049 & 0\%\\
+\hline
+Saturn & 0.052 & 0.052 & 0\%\\
+\hline
+Uranus & 0.047 & 0.047 & 0\%\\
+\hline
+Neptune & 0.013 & 0.010 & 30\%\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{Trajectory.png}
+  \caption{Graph of planet trajectories.}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.4]{EnergyDeviation.png}
+\caption{Graph of Energy Deviation over time.}
+\end{figure}
+
 
 \subsection{Errors}
 
-[Talk about eccentricity errors]
+In the calculation of simulated Semi-Major and Semi-Minor axis's, \textbf{Table 1} & \textbf{Table 2} demonstrate the extremely minimal errors that were present in a run-time that spanned 1000 simulated years - less than 0.1\% for every planet. At first glance, it would seem that these minimal errors should carry over to the eccentricities tabulated in \textbf{Table 3}. However, we recorded very large deviations for three bodies in our system, with Venus differing from literature values by a whopping 250\%. Seeing as eccentricity is a function of only semi-major and semi-minor axis's, this seems incongruous. However, dissecting the equation for eccentricity further yields the reason for this behavior. Graphing the function for eccentricity, recorded above, replacing b/a with a new variable $\alpha$ for simplicity, we see that the function traces out a quarter of a circle. This means that at $\alpha = 1$, the slope of the function for eccentricity goes to infinity. The value of $\alpha$ is $1$ when the semi-major and semi-minor axis's are the same, in other words when the orbit is circular. This presents a problem for the purposes of this project, as all the planetary orbits in our solar system are mostly circular, with Venus, Earth and Neptune being the most circular. As expected, the errors for the eccentricity for these three planets are far larger than those for other planets - other planets record deviations for literature values at or around $0\%$. Unfortunately, we were unable to find another method to calculate the eccentricity of an elliptical orbit, and so predicting the presence of planets, in the manner that Neptune was discovered, is something that our project failed to achieve. 
+
 
 \section{Conclusion}
+The aim of this project was to built a simulator capable of simulating the orbits of planetary bodies, and then calculate a selection of orbital parameters from which we could compare to literature values, with the goal of recreating computationally the discovery of Neptune, which was inferred from orbital perturbations. In that interest, we built an N-Body Simulator, which could take a system from inputted parameters, which were pulled from JPL's Horizon API, then use the Verlet Method to project the system forward in time. We could then fit an ellipse to this created orbital position data, and calculate the orbital parameters for each body in the system. However, despite the fact that we saw impressive accuracy in the simulated values for semi-major and semi-minor axis, we saw large errors in the simulated eccentricity values. This left us with the inability to compare tiny orbital perturbations in the eccentricity. Neptune's orbit is perturbed well within the error we calculated for it's eccentricity, and so we are limited in the analysis we can make on that front.
 
-[Conclusion]
+There is perhaps more work to be done in including additional orbital parameters such as the right angle of the ascending node and the argument of periapsis, which could give our code more points of comparison with which to analyse orbits. That being said, it seems that with our current code, and with our inability to minimize the errors in eccentricity, we are unlikely to be able to distinguish orbital perturbations. Additionally, our code proved remarkably robust over time, conserving energy over thousands of simulation years, and being able to calculate orbit parameters with only partial orbits.
+
 
 \bibliography{bibliography}
 \bibliographystyle{plainurl}
