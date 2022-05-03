@@ -1,14 +1,69 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{orbital_elements}
 Orbital elements.
 \newblock {\em Wikiwand}.
 \newblock URL: \url{https://www.wikiwand.com/en/Orbital_elements}.
 
+\bibitem{Semi-major_axis_info}
+Jr. Alexander J.~Willman.
+\newblock Sol planetary system data.
+\newblock URL: \url{https://www.princeton.edu/~willman/planetary_systems/Sol/}.
+
+\bibitem{EngineeringPlanetX}
+Robert Finch and Mattia~A. Galiazzo.
+\newblock The orbit of planet nine derived from engineering physics.
+\newblock 2020.
+\newblock URL: \url{https://arxiv.org/abs/2001.09150}, \href
+  {https://doi.org/10.48550/ARXIV.2001.09150}
+  {\path{doi:10.48550/ARXIV.2001.09150}}.
+
 \bibitem{Horizons}
 JD~Giorgini and JPL Solar System~Dynamics Group.
 \newblock Horizons on-line ephemeris system.
 \newblock {\em NASA/JPL}.
 \newblock URL: \url{https://ssd.jpl.nasa.gov/horizons/}.
+
+\bibitem{Iorio_2014}
+L.~Iorio.
+\newblock Planet x revamped after the discovery of the sedna-like object 2012
+  {VP}113?
+\newblock {\em Monthly Notices of the Royal Astronomical Society: Letters},
+  444(1):L78--L79, aug 2014.
+\newblock URL: \url{https://doi.org/10.1093%2Fmnrasl%2Fslu116}, \href
+  {https://doi.org/10.1093/mnrasl/slu116} {\path{doi:10.1093/mnrasl/slu116}}.
+
+\bibitem{Rowan_Robinson_2021}
+Michael Rowan-Robinson.
+\newblock A search for planet 9 in the {IRAS} data.
+\newblock {\em Monthly Notices of the Royal Astronomical Society},
+  510(3):3716--3726, nov 2021.
+\newblock URL: \url{https://doi.org/10.1093%2Fmnras%2Fstab3212}, \href
+  {https://doi.org/10.1093/mnras/stab3212} {\path{doi:10.1093/mnras/stab3212}}.
+
+\bibitem{Chaos}
+T.~S.~Sachin Venkatesh and Vishak Vikranth.
+\newblock Investigating the relation between chaos and the three body problem.
+\newblock 2020.
+\newblock URL: \url{https://arxiv.org/abs/2008.12756}, \href
+  {https://doi.org/10.48550/ARXIV.2008.12756}
+  {\path{doi:10.48550/ARXIV.2008.12756}}.
+
+\bibitem{inclination_info}
+Wikipedia.
+\newblock Orbital inclination.
+\newblock URL:
+  \url{https://en.wikipedia.org/wiki/Orbital_inclination#:~:text=The%20inclination%20of%20exoplanets%20or,line%20of%20sight%20with%20Earth}.
+
+\bibitem{Semi-minor_axis_info}
+Wikipedia.
+\newblock Semi-major and semi-minor axes.
+\newblock URL:
+  \url{https://en.wikipedia.org/wiki/Semi-major_and_semi-minor_axes}.
+
+\bibitem{eccentricity_info}
+Dr. David~R. Williams.
+\newblock Planetary fact sheet - metric.
+\newblock URL: \url{https://nssdc.gsfc.nasa.gov/planetary/factsheet/}.
 
 \end{thebibliography}

@@ -8,6 +8,8 @@ import ssl
 import urllib3
 
 
+####################################################################
+
 class CustomHttpAdapter(requests.adapters.HTTPAdapter):
     def __init__(self, ssl_context=None, **kwargs):
         self.ssl_context = ssl_context
@@ -17,6 +19,9 @@ class CustomHttpAdapter(requests.adapters.HTTPAdapter):
         self.poolmanager = urllib3.poolmanager.PoolManager(
             num_pools=connections, maxsize=maxsize,
             block=block, ssl_context=self.ssl_context)
+
+# This code is from: https://stackoverflow.com/questions/71603314/ssl-error-unsafe-legacy-renegotiation-disabled
+####################################################################
 
 
 #Takes in a list of JSON Files, returns a list of "body" objects
@@ -113,11 +118,17 @@ def call_api(data, settings):
     url += "format=json&EPHEM_TYPE=VECTORS&OBJ_DATA=YES&CENTER='500@0'"
     url += "&COMMAND='{}'&START_TIME='{}'&STOP_TIME='{}'".format(planetID, start_time, stop_time)
 
+    ####################################################################
+
     session = requests.session()
     ctx = ssl.create_default_context(ssl.Purpose.SERVER_AUTH)
     ctx.options |= 0x4
     session.mount('https://', CustomHttpAdapter(ctx))
     response = session.get(url).json()
+
+    # This code is from: https://stackoverflow.com/questions/71603314/ssl-error-unsafe-legacy-renegotiation-disabled
+    ####################################################################
+
     result = response['result']
 
     return result

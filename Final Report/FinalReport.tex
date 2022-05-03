@@ -9,9 +9,10 @@
 \usepackage{caption} % captioning package of wonders
 \usepackage{url} % to incorporate clickable links
 \usepackage{cite} % takes care of citations
-\usepackage[final]{hyperref} % adds hyper links inside the generated PDF file
+\usepackage{hyperref} % adds hyper links inside the generated PDF file
 \usepackage{placeins}
 \usepackage{listings}
+
 
 % NECESSARY FOR INCREASED CUSTOMIZATION PACKAGES
 \usepackage{newfloat} % for defining new float in environments (e.g: figure and tables are floats)
@@ -21,6 +22,8 @@
 \usepackage[export]{adjustbox} % to include boxed content other than figures (e.g: boxed equations)
 \usepackage{wrapfig} % to make figures wrap around text
 \usepackage{subcaption} % to make sub-figures inside of figures
+
+\usepackage{gensymb}
 
 % TWEAKS FOR PACKAGES
 \usepackage[margin=2.54cm,a4paper]{geometry} % tweaks margins
@@ -34,7 +37,7 @@
     linkcolor=black,      % color of internal links
     citecolor=blue,       % color of links to bibliography
     filecolor=magenta,    % color of file links
-    urlcolor=red          % color of website links
+    urlcolor=blue          % color of website links
 }
 
 \usepackage{lipsum} % DELETE THIS AND BELOW \lipsum[]'s AND YOU'RE GOOD TO GO
@@ -44,7 +47,7 @@
 % HERE GOES THE COVER PAGE SETUP
 \newcommand{\hwcourse}{\text{Final Report}} % Title of your document
 \newcommand{\hwnumber}{\text{PHYS 3266}} % Name of your study number
-\newcommand{\hwdetails}{ \text{Simulating Orbital Perturbations and Inferring their Sources} \\ }
+\newcommand{\hwdetails}{ \text{Simulating Orbital Perturbations and Inferring their Sources} \\ \vspace{.5cm} \url{github.com/jbrandt35/CompPhysicsProject} }
 \newcommand{\hwauthor}{-Joshua Brandt- \\
                         -Paul Vollrath-  \\
 } % Your name or your group's names
@@ -96,21 +99,21 @@ Date: \@date
 
 
 \begin{abstract}
-   In this paper, we outline our code to estimate the properties of undiscovered planets by using their perterbative influence of known orbits. Using the Verlet method, we iterativley update a set of Body objects correspoding to celestial objects with new forces, velocities and positions. Each object's orbit is then analyzed to find values for its semi-major axis, eccentricity, and inclination to the ecliptic. We are able to succesfully recover eccentricities within 8.7\% excluding an outlier, semi-major axes within 0.04\% and inclinations within 0.87\% based on a four hour PACE run of our code. In our current implementation, we do not believe we have achieved the accuracy required to distinguish between error and perturbation. However, we have laid-out the first steps in the process.
+   In this paper, we outline our code to estimate the properties of undiscovered planets by using their perterbative influence on known orbits. Using the Verlet method, we iterativley update a set of Body objects correspoding to celestial objects with new forces, velocities and positions. Each object's orbit is then analyzed to find values for its semi-major axis, eccentricity, and inclination to the ecliptic. We are able to succesfully recover eccentricities within 8.7\% excluding an outlier, semi-major axes within 0.04\% and inclinations within 0.87\% based on a four hour PACE run of our code. In our current implementation, we do not believe we have achieved the accuracy required to distinguish between error and perturbation. However, we have laid-out the first steps in the process.
 \end{abstract}
 
 \section{Introduction}
 
 \subsubsection{History}
 
-In 1609, Johannes Kepler formulated his three laws of orbital motion after observing the trajectory of Mars in the night-sky. His laws determine the orbits of two interacting celestial objects, allowing one to predict the size, shape, and orientation of the orbits. It wasn't until 1687 when Isaac Newton created his Universal Law of Gravity that it was understood the exact mechanism by which orbits are formed. Newton's Law, $$\vec{F}_g = \frac{Gm_1m_2}{r^2}}\hat{r}$$ now forms the basis for the analysis and prediction of orbits. With the advent of this law came the realization, which Newton made himself, that the orbits of more than two bodies is a deterministic, yet chaotic, phenomenon: there is no equivalent for Kepler's Laws for three or more bodies. This "Three-body Problem" ultimatley became the foundation for Chaos Theory.\par
+In 1609, Johannes Kepler formulated his three laws of orbital motion after observing the trajectory of Mars in the night-sky. His laws determine the orbits of two interacting celestial objects, allowing one to predict the size, shape, and orientation of the orbits. It wasn't until 1687 when Isaac Newton created his Universal Law of Gravity that it was understood the exact mechanism by which orbits are formed. Newton's Law, $$\vec{F}_g = \frac{Gm_1m_2}{r^2}}\hat{r}$$ now forms the basis for the analysis and prediction of orbits. With the advent of this law came the realization, which Newton made himself, that the orbits of more than two bodies is a deterministic, yet chaotic, phenomenon: there is no equivalent for Kepler's Laws for three or more bodies. This "Three-body Problem" ultimatley became a foundation for Chaos Theory \cite{Chaos}.\par
 There is a bright-side however. Since gravity interacts between every pair of objects, the motion of a particular object carries with it information about the distance and mass of other objects. In this way, if you know the propeties of each body graviationally interacting, you can solve Newton's Laws for each, and numerically determine its orbit. \par
 This indeed became an active area of astronomical research in the mid-1800s. Ever since Uranus was observationally discovered in 1781 by William Herschel, its position in the night-sky was tracked. Astronomers John Couch Adams and Urbain Le Verrier noticed slight deviations in the orbit of Uranus: perturbations not predicted by interacting with any known planets. Using these perturbations, both astronomers calculated where a new planet would have to be to cause the observed orbit. Within the first night of looking, equipped with Le Verrier's prediction, German astronmer Johann Galle saw Neptune through a telescope for the first time. \par
-Ever since that first purposeful discovery of a planet, astronomers have been using this method to detect planets, in our own Solar System and in others. In fact, many believe that there is a yet undiscovered "Planet X" outside of the Kuiper Belt beyond apparent sight. They cite unaccounted perturbations in the known planets.
+Ever since that first purposeful discovery of a planet, astronomers have been using this method to detect planets, in our own Solar System and in others. In fact, many believe that there is a yet undiscovered "Planet X" outside of the Kuiper Belt beyond apparent sight (See \cite{Iorio_2014, EngineeringPlanetX, Rowan_Robinson_2021}). They cite unaccounted perturbations in the known planets.
 
 \subsubsection{Goal}
 
-The goal of our project is to computationally implement this process. Taking in a perturbed orbit, can we give an accurate suggestion of the properties of the planet doing the perturbing? The idea is to simulate a set of known planets and stars, each time making a guess as to where and how large a new planet would need to be. Evolving the system over many years, we compute properties (See \ref{sec:elements}) of the orbit, and compare them to the observed (perturbed) properties. In a sort of Bayesian analysis, if our guessed planet gives an orbit that closley matches the perturbed orbit, we can say that the guessed planet has a high likliehood of having the properties of a real planet doing the perturbing.
+The goal of our project is to computationally implement this process. Taking in a perturbed orbit, can we give an accurate suggestion of the properties of the planet doing the perturbing? The idea is to simulate a set of known planets and stars, each time making a guess as to where and how large a new planet would need to be. Evolving the system over many years, we compute properties (See \autoref{sec:elements}) of the orbit, and compare them to the observed (perturbed) properties. In a sort of Bayesian analysis, if our guessed planet gives an orbit that closley matches the perturbed orbit, we can say that the guessed planet has a high likliehood of having the properties of a real planet doing the perturbing.
 
 \subsubsection{Reference Frames}
 
@@ -127,7 +130,7 @@ The ecliptic, as we will treat it, is a stationary frame: the frame in which the
   \label{fig:orbital_elements}
 \end{figure}
 
-Orbital elements are quantities which define the shape, size, and orientation of an orbit. Most of the elements are shown in \ref{fig:orbital_elements}, there is additionally the semi-major axis and the eccentricity. To be clear, they are:
+Orbital elements are quantities which define the shape, size, and orientation of an orbit. Most of the elements are shown in \autoref{fig:orbital_elements}, there is additionally the semi-major axis and the eccentricity. To be clear, they are:
 
 \begin{itemize}
   \item Inclination ($\iota$) - the angle between the orbit and the ecliptic.
@@ -158,7 +161,7 @@ The data-entry to our code is done through Javascript Object Notation (JSON) fil
 }
 \end{lstlisting}
 
-This contains all of the information needed to run a simulation. For each planet, the code will look for the corresponding planet file. $dt$ represents the length of the time-step to use, the Runtime is how many real seconds to fun for, and the Ephermeris Date is which date you want to initialize the Solar System at (See \ref{sec:API})). \par
+This contains all of the information needed to run a simulation. For each planet, the code will look for the corresponding planet file. $dt$ represents the length of the time-step to use, the Runtime is how many real seconds to fun for, and the Ephermeris Date is which date you want to initialize the Solar System at (See \autoref{sec:API})). \par
 The planet files contain information on the stars/planets you want to use during the simulation. Below is Earth's
 
 \begin{lstlisting}
@@ -209,7 +212,7 @@ k=hf(x(t+h),t+h)
 v(t+\frac{3}{2}h)=v(t+\frac{1}{2}h) + k
 \end{equation}
 
-We implement the Verlet Method computationally by storing an attribute in each object instance for the velocity at half time-step intervals. Since the values we want to actually store for velocity in the object velocity history attribute are at full time steps, the simulator module first updates the position value for each planet using the velocity value that is a half time-step ahead of the position value. The velocity at that full time-step is then calculated from the half time-step velocity using a Euler approximation, and stored in the velocity history object attribute. In essence, while the stored velocity values for each iteration are calculated using a Euler approximation, the generated information is calculated using the Verlet Method, and so energy is conserved over time. The accuracy of this method over time is demonstrated in the Results section.
+We implement the Verlet Method computationally by storing an attribute in each object instance for the velocity at half time-step intervals. Since the values we want to actually store for velocity in the object velocity history attribute are at full time steps, the simulator module first updates the position value for each planet using the velocity value that is a half time-step ahead of the position value. The velocity at that full time-step is then calculated from the half time-step velocity using a Euler approximation, and stored in the velocity history object attribute. In essence, while the stored velocity values for each iteration are calculated using a Euler approximation, the generated information is calculated using the Verlet Method, and so energy is conserved over time. The accuracy of this method over time is demonstrated in \autoref{sec:results}.
 
 \subsection{Orbit Analyzer}
 
@@ -276,7 +279,7 @@ With that done, we can know analyze the orbit within its own plane. The general 
 The eccentricity is easily calculated with the standard formula $$e=\sqrt{1-\frac{b^2}{a^2}}$$
 
 \subsection{Data Output}
-Having generated the orbital parameters, the program then creates an output text file for each body object with a file name format of 
+Having generated the orbital parameters, the program then creates an output text file for each body object with a file name format of
 
 \begin{verbatim}
     object.name + "_output.txt"
@@ -299,112 +302,160 @@ These output files, after there creation, are saved into an "OutputFiles" Folder
     X = 1.725  Y = 4.738  Z = -0.058
 \end{verbatim}
 
-The output module of our program also generates two graphs. The first is a set of two trajectory plots, the first including all planets, and the second only the first four planets from the Sun. These plots are created from the position history array attribute of each body object. The second graph is a plot of the energy deviations from the energy average over a specified period, visualized for the total run-time of our simulator. Both graphs are show below in the Results section.
+The output module of our program also generates two graphs. The first is a set of two trajectory plots, the first including all planets, and the second only the first four planets from the Sun. These plots are created from the position history array attribute of each body object. The second graph is a plot of the energy deviations from the energy average over a specified period, visualized for the total run-time of our simulator. Both graphs are show below in \autoref{sec:results}.
 
 \section{Results}
+\label{sec:results}
 
-\begin{table}[h]
+Below, we present the results of running our code in the described configuration on PACE for four hours real-time, which amounted to over 1,000 years in simulated time. The Verlet method was configured with a time-steo of one hour. This system was meant to represent a copy of the true Solar System. We compare the automated analysis of our results with the accepted values, and discuss sources of error in \autoref{sec:errors}.
+
+\begin{table}[h!]
 \centering
+\caption{}
+\label{tab:table_1}
 \begin{tabular}{|c|c|c|c|}
 \hline
-\multicolumn{4}{|c|}{\textbf{Table 1:} Summary of Semi-Major Values}\\
+\multicolumn{4}{|c|}{Summary of Semi-Major Values}\\
 \hline
-Planet & Simulated Value & Accepted Value & Error(\%)\\
+Planet & Simulated Value (AU) & Accepted Value (AU) \cite{Semi-major_axis_info} & Error(\%)\\
 \hline
-Mercury & 0.387 & 0.387 & 0\%\\
+Mercury & 0.387 & 0.387 & 0\\
 \hline
-Venus & 0.723 & 0.723 & 0\%\\
+Venus & 0.723 & 0.723 & 0\\
 \hline
-Earth & 0.999 & 1.000 & 0.1\%\\
+Earth & 0.999 & 1.000 & 0.1\\
 \hline
-Mars & 1.523 & 1.524 & 0.06\%\\
+Mars & 1.523 & 1.524 & 0.06\\
 \hline
-Jupiter & 5.199 & 5.203 & 0.07\%\\
+Jupiter & 5.199 & 5.203 & 0.07\\
 \hline
-Saturn & 9.541 & 9.537 & 0.04\%\\
+Saturn & 9.541 & 9.537 & 0.04\\
 \hline
-Uranus & 19.188 & 19.189 & 0.005\%\\
+Uranus & 19.188 & 19.189 & 0.005\\
 \hline
-Neptune & 30.080 & 30.070 & 0.03\%\\
+Neptune & 30.080 & 30.070 & 0.03\\
 \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[h!]
 \centering
+\caption{}
+\label{tab:table_2}
 \begin{tabular}{|c|c|c|c|}
 \hline
-\multicolumn{4}{|c|}{\textbf{Table 2:} Summary of Semi-Minor Values}\\
+\multicolumn{4}{|c|}{Summary of Semi-Minor Values}\\
 \hline
-Planet & Simulated Value & Accepted Value & Error(\%)\\
+Planet & Simulated Value (AU) & Accepted Value (AU) \cite{Semi-minor_axis_info} & Error(\%)\\
 \hline
-Mercury & 0.379 & 0.379 & 0\%\\
+Mercury & 0.379 & 0.379 & 0\\
 \hline
-Venus & 0.723 & 0.723 & 0\%\\
+Venus & 0.723 & 0.723 & 0\\
 \hline
-Earth & 0.999 & 1.000 & 0.1\%\\
+Earth & 0.999 & 1.000 & 0.1\\
 \hline
-Mars & 1.517 & 1.517 & 0\%\\
+Mars & 1.517 & 1.517 & 0\\
 \hline
-Jupiter & 5.192 & 5.198 & 0.11\%\\
+Jupiter & 5.192 & 5.198 & 0.11\\
 \hline
-Saturn & 9.527 & 9.567 & 0.41\%\\
+Saturn & 9.527 & 9.567 & 0.41\\
 \hline
-Uranus & 19.167 & 19.198 & 0.16\%\\
+Uranus & 19.167 & 19.198 & 0.16\\
 \hline
-Neptune & 30.077 & 30.109 & 0.10\%\\
+Neptune & 30.077 & 30.109 & 0.10\\
 \hline
 \end{tabular}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[h!]
 \centering
+\caption{}
+\label{tab:table_3}
 \begin{tabular}{|c|c|c|c|}
 \hline
-\multicolumn{4}{|c|}{\textbf{Table 3:} Summary of Eccentricity Values}\\
+\multicolumn{4}{|c|}{Summary of Eccentricity Values}\\
 \hline
-Planet & Simulated Value & Accepted Value & Error(\%)\\
+Planet & Simulated Value & Accepted Value \cite{eccentricity_info} & Error(\%)\\
 \hline
-Mercury & 0.203 & 0.206 & 1.45\%\\
+Mercury & 0.203 & 0.206 & 1.45\\
 \hline
-Venus & 0.024 & 0.007 & 242.85\%\\
+Venus & 0.024 & 0.007 & 242.85\\
 \hline
-Earth & 0.022 & 0.017 & 29.41\%\\
+Earth & 0.022 & 0.017 & 29.41\\
 \hline
-Mars & 0.094 & 0.094 & 0\%\\
+Mars & 0.094 & 0.094 & 0\\
 \hline
-Jupiter & 0.049 & 0.049 & 0\%\\
+Jupiter & 0.049 & 0.049 & 0\\
 \hline
-Saturn & 0.052 & 0.052 & 0\%\\
+Saturn & 0.052 & 0.052 & 0\\
 \hline
-Uranus & 0.047 & 0.047 & 0\%\\
+Uranus & 0.047 & 0.047 & 0\\
 \hline
-Neptune & 0.013 & 0.010 & 30\%\\
+Neptune & 0.013 & 0.010 & 30\\
 \hline
 \end{tabular}
 \end{table}
+
+
+\begin{table}[h!]
+\centering
+\caption{}
+\label{tab:table_4}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{4}{|c|}{Summary of Inclination Values}\\
+\hline
+Planet & Simulated Value ($\degree$) & Accepted Value ($\degree$) \cite{inclination_info} & Error(\%)\\
+\hline
+Mercury & 6.97 & 7.01 & 0.570\\
+\hline
+Venus & 3.389 & 3.39 & 0.029\\
+\hline
+Earth & 0.0732 & 0 & N/A\\
+\hline
+Mars & 1.802 & 1.85 & 2.595\\
+\hline
+Jupiter & 1.293 & 1.31 & 01.298\\
+\hline
+Saturn & 2.502 & 2.49 & 0.482\\
+\hline
+Uranus & 0.765 & 0.77 & 0.649\\
+\hline
+Neptune & 1.7780 & 1.77 & 0.452\\
+\hline
+\end{tabular}
+\end{table}
+
+\FloatBarrier
 
 
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{Trajectory.png}
   \caption{Graph of planet trajectories.}
+  \label{fig:trajectory}
 \end{figure}
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.4]{EnergyDeviation.png}
+\includegraphics[scale=0.4]{EnergyDeviations.png}
 \caption{Graph of Energy Deviation over time.}
+\label{fig:energy}
 \end{figure}
 
 
-\subsection{Errors}
+\subsection{Errors and Comparisons}
+\label{sec:errors}
 
-In the calculation of simulated Semi-Major and Semi-Minor axis's, \textbf{Table 1} & \textbf{Table 2} demonstrate the extremely minimal errors that were present in a run-time that spanned 1000 simulated years - less than 0.1\% for every planet. At first glance, it would seem that these minimal errors should carry over to the eccentricities tabulated in \textbf{Table 3}. However, we recorded very large deviations for three bodies in our system, with Venus differing from literature values by a whopping 250\%. Seeing as eccentricity is a function of only semi-major and semi-minor axis's, this seems incongruous. However, dissecting the equation for eccentricity further yields the reason for this behavior. Graphing the function for eccentricity, recorded above, replacing b/a with a new variable $\alpha$ for simplicity, we see that the function traces out a quarter of a circle. This means that at $\alpha = 1$, the slope of the function for eccentricity goes to infinity. The value of $\alpha$ is $1$ when the semi-major and semi-minor axis's are the same, in other words when the orbit is circular. This presents a problem for the purposes of this project, as all the planetary orbits in our solar system are mostly circular, with Venus, Earth and Neptune being the most circular. As expected, the errors for the eccentricity for these three planets are far larger than those for other planets - other planets record deviations for literature values at or around $0\%$. Unfortunately, we were unable to find another method to calculate the eccentricity of an elliptical orbit, and so predicting the presence of planets, in the manner that Neptune was discovered, is something that our project failed to achieve. 
+In the calculation of simulated Semi-Major and Semi-Minor axes, \autoref{tab:table_1} and \autoref{tab:table_2} demonstrate the extremely minimal errors that were present in a run-time that spanned 1000 simulated years - less than 0.1\% for every planet. At first glance, it would seem that these minimal errors should carry over to the eccentricities tabulated in \autoref{tab:table_3}. However, we recorded very large deviations for three bodies in our system, with Venus differing from literature values by a whopping 250\%. Seeing as eccentricity is a function of only semi-major and semi-minor axis's, this seems incongruous. However, dissecting the equation for eccentricity further yields the reason for this behavior. Graphing the function for eccentricity, recorded above, replacing b/a with a new variable $\alpha$ for simplicity, we see that the function traces out a quarter of a circle. This means that at $\alpha = 1$, the slope of the function for eccentricity goes to infinity. The value of $\alpha$ is $1$ when the semi-major and semi-minor axis's are the same, in other words when the orbit is circular. This presents a problem for the purposes of this project, as all the planetary orbits in our solar system are mostly circular, with Venus, Earth and Neptune being the most circular. As expected, the errors for the eccentricity for these three planets are far larger than those for other planets - other planets record deviations for literature values at or around $0\%$. Unfortunately, we were unable to find another method to calculate the eccentricity of an elliptical orbit, and so predicting the presence of planets, in the manner that Neptune was discovered, is something that our project failed to achieve. \par
+Luckily, inclination is estimated completley independently of eccentricity and semi-major axis. We were delighted to see excellent agreement between expected and simulated values for inclination. We believe the method of fitting a plane to the orbit does not suffer the same sensitivity to bias as the size measurements, and so we saw very low errors across the board for this element. \par
+As is clear from \autoref{fig:energy}, our system mainted nearly perfect conservation of mechanical energy over the thousand-year run-time, only varying about three parts in 10 million. This is as expected since the Verlet method conserves energy, and all of our interactions were calculated using that method. This also shows why the orbital trajectories in \autoref{fig:trajectory} maintain a consistent, thin path over even such an extended period.
+
+
 
 
 \section{Conclusion}
-The aim of this project was to built a simulator capable of simulating the orbits of planetary bodies, and then calculate a selection of orbital parameters from which we could compare to literature values, with the goal of recreating computationally the discovery of Neptune, which was inferred from orbital perturbations. In that interest, we built an N-Body Simulator, which could take a system from inputted parameters, which were pulled from JPL's Horizon API, then use the Verlet Method to project the system forward in time. We could then fit an ellipse to this created orbital position data, and calculate the orbital parameters for each body in the system. However, despite the fact that we saw impressive accuracy in the simulated values for semi-major and semi-minor axis, we saw large errors in the simulated eccentricity values. This left us with the inability to compare tiny orbital perturbations in the eccentricity. Neptune's orbit is perturbed well within the error we calculated for it's eccentricity, and so we are limited in the analysis we can make on that front.
+The aim of this project was to built a simulator capable of simulating the orbits of planetary bodies, and then calculate a selection of orbital parameters from which we could compare to literature values, with the goal of recreating computationally the discovery of Neptune, which was inferred from orbital perturbations. In that interest, we built an N-Body Simulator, which could take a system from inputted parameters, which were pulled from JPL's Horizon API, then use the Verlet Method to project the system forward in time. We could then fit an ellipse to this created orbital position data, and calculate the orbital parameters for each body in the system. However, despite the fact that we saw impressive accuracy in the simulated values for semi-major, semi-minor axis and inclination, we saw large errors in the simulated eccentricity values. This left us with the inability to compare tiny orbital perturbations in the eccentricity. Neptune's orbit is perturbed well within the error we calculated for it's eccentricity, and so we are limited in the analysis we can make on that front. Nevertheless, it was clear that the Verlet method sucessfully resolved the problem of orbital instability we faced at the beggining: perfectly conserving energy and maintaining stable orbits for millenia.
 
 There is perhaps more work to be done in including additional orbital parameters such as the right angle of the ascending node and the argument of periapsis, which could give our code more points of comparison with which to analyse orbits. That being said, it seems that with our current code, and with our inability to minimize the errors in eccentricity, we are unlikely to be able to distinguish orbital perturbations. Additionally, our code proved remarkably robust over time, conserving energy over thousands of simulation years, and being able to calculate orbit parameters with only partial orbits.
 
@@ -413,4 +464,3 @@ There is perhaps more work to be done in including additional orbital parameters
 \bibliographystyle{plainurl}
 
 \end{document}
-

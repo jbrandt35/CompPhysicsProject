@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex FinalReport"] 1650829280 "FinalReport.aux" "FinalReport.bbl" "FinalReport" 1650829283
+["bibtex FinalReport"] 1651543807 "FinalReport.aux" "FinalReport.bbl" "FinalReport" 1651543979
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/urlbst/plainurl.bst" 1562101090 33034 6f80d55ce824a32ed5562a5220ff287a ""
-  "FinalReport.aux" 1650829281 3900 f0d415ec11b519a020f09c53fb570da9 "pdflatex"
-  "bibliography.bib" 1650828005 401 69c8c8938b729855d61add7a1e51e18e ""
+  "FinalReport.aux" 1651543979 5606 8c696321d2aa6e02d8498ffc1f4f162a "pdflatex"
+  "bibliography.bib" 1651542984 2999 3e0a96a088ea194736c3e5b4d3d4e422 ""
   (generated)
   "FinalReport.bbl"
   "FinalReport.blg"
-["pdflatex"] 1650829280 "FinalReport.tex" "FinalReport.pdf" "FinalReport" 1650829283
+["pdflatex"] 1651543978 "FinalReport.tex" "FinalReport.pdf" "FinalReport" 1651543979
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1136768653 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
@@ -43,6 +43,7 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb" 1248133631 36118 fad905eba93cff5bce1e185fe980a177 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb" 1248133631 24252 1e4e051947e12dfb50fee0b7f4e26e3a ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb" 1215737283 136101 f533469f523533d38317ab5729d00c8a ""
@@ -131,6 +132,7 @@
   "/usr/local/texlive/2021/texmf-dist/tex/latex/tools/tabularx.sty" 1580683321 7148 4ba718200276533b3a293c311a9349e0 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/url/url.sty" 1388531844 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/varwidth/varwidth.sty" 1238697683 10894 d359a13923460b2a73d4312d613554c8 ""
+  "/usr/local/texlive/2021/texmf-dist/tex/latex/was/gensymb.sty" 1137111079 4612 29d19942d7123701aa6a3876b9ba11b1 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/wrapfig/wrapfig.sty" 1137111090 26220 3701aebf80ccdef248c0c20dd062fea9 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/xcolor/xcolor.sty" 1463002160 55589 34128738f682d033422ca125f82e5d62 ""
   "/usr/local/texlive/2021/texmf-dist/tex/latex/xkeyval/xkeyval.sty" 1605910342 4902 efb3d66683a2da2a232f71e3a571a899 ""
@@ -138,14 +140,16 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1622563257 2724734 eaf548c60d5b1468c09cd3277689fcfc ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "FinalReport.aux" 1650829281 3900 f0d415ec11b519a020f09c53fb570da9 "pdflatex"
-  "FinalReport.bbl" 1650829280 386 422ffb61fd8b23090d356bdb3939bedc "bibtex FinalReport"
-  "FinalReport.out" 1650829281 2419 9583a4f316ece75cfcd2b5d07d2f2def "pdflatex"
-  "FinalReport.tex" 1650829282 18083 0f4329ae9dffe5a6328cd20ac92adaad ""
+  "EnergyDeviations.png" 1651513965 316789 9a58e9f8d7f441a3688b284bf7c8b22e ""
+  "FinalReport.aux" 1651543979 5606 8c696321d2aa6e02d8498ffc1f4f162a "pdflatex"
+  "FinalReport.bbl" 1651543808 2458 8adac6321806b4fba1ff4902cff453b3 "bibtex FinalReport"
+  "FinalReport.out" 1651543979 2359 39bc619411c6c4014f489124de3ea379 "pdflatex"
+  "FinalReport.tex" 1651543977 30658 917ef705c53cfcba4f978468d1139b58 ""
   "OrbitalElements.png" 1650825002 57341 ef37a8a9d902ee91b4c06deadcf367a7 ""
   "SoPBanner.jpeg" 1644955752 49855 b4a5f094578ed7cec60f87646267125a ""
+  "Trajectory.png" 1651513965 288711 308d1f10c9d486d185d79edff6925fda ""
   (generated)
+  "FinalReport.pdf"
+  "FinalReport.log"
   "FinalReport.out"
   "FinalReport.aux"
-  "FinalReport.log"
-  "FinalReport.pdf"

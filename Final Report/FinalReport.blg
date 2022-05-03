@@ -11,46 +11,56 @@ Database file #1: bibliography.bib
 Warning--to sort, need author or key in orbital_elements
 Warning--empty author in orbital_elements
 Warning--empty year in orbital_elements
+Warning--empty journal in Semi-major_axis_info
+Warning--empty year in Semi-major_axis_info
+Warning--empty journal in EngineeringPlanetX
 Warning--empty year in Horizons
-You've used 2 entries,
+Warning--empty journal in Chaos
+Warning--empty journal in inclination_info
+Warning--empty year in inclination_info
+Warning--empty journal in Semi-minor_axis_info
+Warning--empty year in Semi-minor_axis_info
+Warning--empty journal in eccentricity_info
+Warning--empty year in eccentricity_info
+You've used 10 entries,
             2882 wiz_defined-function locations,
-            633 strings with 5292 characters,
-and the built_in function-call counts, 713 in all, are:
-= -- 67
-> -- 18
+            685 strings with 6733 characters,
+and the built_in function-call counts, 3805 in all, are:
+= -- 389
+> -- 102
 < -- 0
-+ -- 6
-- -- 4
-* -- 37
-:= -- 115
-add.period$ -- 7
-call.type$ -- 2
-change.case$ -- 8
++ -- 36
+- -- 24
+* -- 215
+:= -- 537
+add.period$ -- 35
+call.type$ -- 10
+change.case$ -- 42
 chr.to.int$ -- 0
-cite$ -- 6
-duplicate$ -- 24
-empty$ -- 73
-format.name$ -- 4
-if$ -- 186
+cite$ -- 24
+duplicate$ -- 122
+empty$ -- 391
+format.name$ -- 24
+if$ -- 1006
 int.to.chr$ -- 0
-int.to.str$ -- 2
-missing$ -- 2
-newline$ -- 14
-num.names$ -- 2
-pop$ -- 23
+int.to.str$ -- 10
+missing$ -- 10
+newline$ -- 58
+num.names$ -- 18
+pop$ -- 113
 preamble$ -- 1
-purify$ -- 6
+purify$ -- 32
 quote$ -- 0
-skip$ -- 55
+skip$ -- 288
 stack$ -- 0
-substring$ -- 10
-swap$ -- 2
+substring$ -- 108
+swap$ -- 12
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 8
-warning$ -- 4
-while$ -- 2
-width$ -- 3
-write$ -- 22
-(There were 4 warnings)
+type$ -- 40
+warning$ -- 14
+while$ -- 22
+width$ -- 12
+write$ -- 110
+(There were 14 warnings)

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.1)  24 APR 2022 15:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.6.1)  2 MAY 2022 22:12
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -192,7 +192,6 @@ File: puenc.def 2021-02-27 v7.00k Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
-Package hyperref Info: Option `final' set `true' on input line 4073.
 Package hyperref Info: Hyper figures OFF on input line 4192.
 Package hyperref Info: Link nesting OFF on input line 4197.
 Package hyperref Info: Hyper index ON on input line 4200.
@@ -359,6 +358,8 @@ Package: wrapfig 2003/01/31  v 3.6
 Package: subcaption 2020/10/07 v1.3j Sub-captions (AR)
 \c@subfigure=\count291
 \c@subtable=\count292
+) (/usr/local/texlive/2021/texmf-dist/tex/latex/was/gensymb.sty
+Package: gensymb 2003/07/02 v1.0 (WaS)
 ) (/usr/local/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (/usr/local/texlive/2021/texmf-dist/tex/generic/iftex/ifvtex.sty
@@ -378,13 +379,13 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@dimlist=\toks31
 )
 
-./FinalReport.tex:28: Package caption Error: `12pt' undefined in families `caption@font'.
+./FinalReport.tex:31: Package caption Error: `12pt' undefined in families `caption@font'.
 
 See the caption package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.28 \captionsetup{font=12pt}
+l.31 \captionsetup{font=12pt}
                               % caption text size
 If you do not understand this error, please take a closer look
 at the documentation of the `caption' package, especially the
@@ -392,7 +393,7 @@ section about errors.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-Package hyperref Info: Option `colorlinks' set `true' on input line 38.
+Package hyperref Info: Option `colorlinks' set `true' on input line 41.
 (/usr/local/texlive/2021/texmf-dist/tex/latex/lipsum/lipsum.sty (/usr/local/texlive/2021/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2021-02-18 L3 programming layer (loader) 
  (/usr/local/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
@@ -406,24 +407,24 @@ File: lipsum.ltd.tex 2021-03-03 v2.3 The Lorem ipsum dummy text
 )) (./FinalReport.aux)
 \openout1 = `FinalReport.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 56.
-LaTeX Font Info:    ... okay on input line 56.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 59.
+LaTeX Font Info:    ... okay on input line 59.
  (/usr/local/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count297
@@ -448,7 +449,7 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring ON on input line 56.
+Package hyperref Info: Link coloring ON on input line 59.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/local/texlive/2021/texmf-dist/tex/latex/refcount/refcount.sty
@@ -458,9 +459,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count303
 )
-LaTeX Info: Redefining \ref on input line 56.
-LaTeX Info: Redefining \pageref on input line 56.
-LaTeX Info: Redefining \nameref on input line 56.
+LaTeX Info: Redefining \ref on input line 59.
+LaTeX Info: Redefining \pageref on input line 59.
+LaTeX Info: Redefining \nameref on input line 59.
  (./FinalReport.out) (./FinalReport.out)
 \@outlinefile=\write3
 \openout3 = `FinalReport.out'.
@@ -468,6 +469,16 @@ LaTeX Info: Redefining \nameref on input line 56.
 \c@lstlisting=\count304
 Package newfloat Info: `float' package detected.
 Package newfloat Info: `wrapfig' package detected.
+LaTeX Info: Redefining \celsius on input line 59.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 59.
+
+
+Package gensymb Warning: Not defining \perthousand.
+
+LaTeX Info: Redefining \ohm on input line 59.
+Package gensymb Info: Using \Omega for \ohm on input line 59.
+
+Package gensymb Warning: Not defining \micro.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -503,26 +514,26 @@ Package newfloat Info: `wrapfig' package detected.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<SoPBanner.jpeg, id=84, 983.675pt x 226.8475pt>
+<SoPBanner.jpeg, id=80, 983.675pt x 226.8475pt>
 File: SoPBanner.jpeg Graphic file (type jpg)
 <use SoPBanner.jpeg>
-Package pdftex.def Info: SoPBanner.jpeg  used on input line 63.
+Package pdftex.def Info: SoPBanner.jpeg  used on input line 66.
 (pdftex.def)             Requested size: 227.62204pt x 52.49226pt.
 
-./FinalReport.tex:65: LaTeX Error: There's no line here to end.
+./FinalReport.tex:68: LaTeX Error: There's no line here to end.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.65 \\
+l.68 \\
        [2cm]
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-./FinalReport.tex:75: Undefined control sequence.
-l.75 { \large \bfseries \hwname
+./FinalReport.tex:78: Undefined control sequence.
+l.78 { \large \bfseries \hwname
                                }\\ \vspace{.5cm}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -531,33 +542,28 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-./FinalReport.tex:75: LaTeX Error: There's no line here to end.
+./FinalReport.tex:78: LaTeX Error: There's no line here to end.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.75 { \large \bfseries \hwname}\\
+l.78 { \large \bfseries \hwname}\\
                                    \vspace{.5cm}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
-
-./FinalReport.tex:76: LaTeX Error: There's no line here to end.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.76 { \hwdetails}\\
-                     \vspace{.5cm}
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-./FinalReport.tex:77: Undefined control sequence.
-l.77 { \bfseries \hwdate
+LaTeX Font Info:    Trying to load font information for U+msa on input line 79.
+(/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 79.
+ (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+./FinalReport.tex:80: Undefined control sequence.
+l.80 { \bfseries \hwdate
                         }\\ \vspace{.5cm}
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -566,13 +572,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-./FinalReport.tex:77: LaTeX Error: There's no line here to end.
+./FinalReport.tex:80: LaTeX Error: There's no line here to end.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.77 { \bfseries \hwdate}\\
+l.80 { \bfseries \hwdate}\\
                             \vspace{.5cm}
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
@@ -583,18 +589,10 @@ or  <return>  to continue without it.
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./SoPBanner.jpeg>]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 104.
+(hyperref)                than one, level fixed on input line 107.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 106.
-(/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Trying to load font information for U+msb on input line 106.
- (/usr/local/texlive/2021/texmf-dist/tex/latex/amsfonts/umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-./FinalReport.tex:106: Extra }, or forgotten $.
-l.106 ...s Law, $$\vec{F}_g = \frac{Gm_1m_2}{r^2}}
+./FinalReport.tex:109: Extra }, or forgotten $.
+l.109 ...s Law, $$\vec{F}_g = \frac{Gm_1m_2}{r^2}}
                                                   \hat{r}$$ now forms the ba...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -605,34 +603,34 @@ deleted material, e.g., by typing `I$}'.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.114 
+l.117 
        [1]
-<OrbitalElements.png, id=103, 582.175pt x 524.96124pt>
+<OrbitalElements.png, id=109, 582.175pt x 524.96124pt>
 File: OrbitalElements.png Graphic file (type png)
 <use OrbitalElements.png>
-Package pdftex.def Info: OrbitalElements.png  used on input line 125.
+Package pdftex.def Info: OrbitalElements.png  used on input line 128.
 (pdftex.def)             Requested size: 232.86588pt x 209.98077pt.
  [2 <./OrbitalElements.png>]
-LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 152.
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 155.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 152.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 155.
 
-Overfull \hbox (40.53088pt too wide) in paragraph at lines 153--154
+Overfull \hbox (40.53088pt too wide) in paragraph at lines 156--157
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-LaTeX Font Info:    Trying to load font information for OML+cmr on input line 167.
+LaTeX Font Info:    Trying to load font information for OML+cmr on input line 170.
 (/usr/local/texlive/2021/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 167.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 170.
 
-./FinalReport.tex:174: Undefined control sequence.
-l.174 The "\<
+./FinalReport.tex:177: Undefined control sequence.
+l.177 The "\<
              Find\>" keyword is used when you're using a real planet which c...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -640,15 +638,21 @@ misspelled it (e.g., `\hobx'), type `I' and the correct
 spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
+[3]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\@ifnextchar' on input line 177.
+(hyperref)                removing `\@ifnextchar' on input line 180.
 
-[3] [4]
-./FinalReport.tex:198: Extra }, or forgotten $.
+
+Overfull \hbox (53.38199pt too wide) in paragraph at lines 189--189
+[]    \OT1/cmtt/m/n/12 url += "&COMMAND='{}'&START_TIME='{}'".format(planetID, start_time, stop_time)[] 
+ []
+
+[4] [5]
+./FinalReport.tex:224: Extra }, or forgotten $.
 <recently read> }
                  
-l.198    x_1 & y_1 &}
+l.224    x_1 & y_1 &}
                       \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -656,54 +660,9 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:200: Extra }, or forgotten $.
-l.200    x_n & y_n}
+./FinalReport.tex:226: Extra }, or forgotten $.
+l.226    x_n & y_n}
                    
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./FinalReport.tex:201: Extra }, or forgotten $.
-l.201 ...enspace    \vec{x}=\begin{bmatrix}A \\ B}
-                                                  \end{bmatrix} \   \enspace...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./FinalReport.tex:201: Extra }, or forgotten $.
-l.201 ...b} = \begin{bmatrix}z_1 \\ \vdots \\ z_n}
-                                                  \end{bmatrix}$$
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./FinalReport.tex:215: Extra }, or forgotten $.
-l.215    z}
-           
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./FinalReport.tex:219: Extra }, or forgotten $.
-l.219     z}
-            
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./FinalReport.tex:223: Extra }, or forgotten $.
-l.223      0}
-             
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -711,35 +670,17 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 ./FinalReport.tex:227: Extra }, or forgotten $.
-l.227       1}
-              
+l.227 ...enspace    \vec{x}=\begin{bmatrix}A \\ B}
+                                                  \end{bmatrix} \   \enspace...
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-./FinalReport.tex:231: Extra }, or forgotten $.
-l.231    -\frac{B}{A} & -\frac{1}{A}}
-                                      & A \\
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./FinalReport.tex:233: Extra }, or forgotten $.
-l.233    0 & 1 & 1}
-                   
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./FinalReport.tex:239: Extra }, or forgotten $.
-l.239    -\frac{B}{A} & -\frac{1}{A}}
-                                      & A \\
+./FinalReport.tex:227: Extra }, or forgotten $.
+l.227 ...b} = \begin{bmatrix}z_1 \\ \vdots \\ z_n}
+                                                  \end{bmatrix}$$
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -747,7 +688,52 @@ the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
 ./FinalReport.tex:241: Extra }, or forgotten $.
-l.241    0 & 1 & 1}
+l.241    z}
+           
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./FinalReport.tex:245: Extra }, or forgotten $.
+l.245     z}
+            
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./FinalReport.tex:249: Extra }, or forgotten $.
+l.249      0}
+             
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./FinalReport.tex:253: Extra }, or forgotten $.
+l.253       1}
+              
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./FinalReport.tex:257: Extra }, or forgotten $.
+l.257    -\frac{B}{A} & -\frac{1}{A}}
+                                      & A \\
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./FinalReport.tex:259: Extra }, or forgotten $.
+l.259    0 & 1 & 1}
                    
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
@@ -755,24 +741,75 @@ you forgot something else, as in `\hbox{$x}'. In such cases
 the way to recover is to insert both the forgotten and the
 deleted material, e.g., by typing `I$}'.
 
-[5] (./FinalReport.bbl [6]) [7] (./FinalReport.aux)
+./FinalReport.tex:265: Extra }, or forgotten $.
+l.265    -\frac{B}{A} & -\frac{1}{A}}
+                                      & A \\
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./FinalReport.tex:267: Extra }, or forgotten $.
+l.267    0 & 1 & 1}
+                   
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+[6] [7]
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[8]
+<Trajectory.png, id=181, 469.755pt x 475.27562pt>
+File: Trajectory.png Graphic file (type png)
+<use Trajectory.png>
+Package pdftex.def Info: Trajectory.png  used on input line 434.
+(pdftex.def)             Requested size: 187.89867pt x 190.10687pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<EnergyDeviations.png, id=182, 584.1825pt x 439.6425pt>
+File: EnergyDeviations.png Graphic file (type png)
+<use EnergyDeviations.png>
+Package pdftex.def Info: EnergyDeviations.png  used on input line 441.
+(pdftex.def)             Requested size: 233.66885pt x 175.85388pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[9] [10 <./Trajectory.png> <./EnergyDeviations.png>] (./FinalReport.bbl [11]
+Underfull \hbox (badness 10000) in paragraph at lines 53--57
+\OT1/cmtt/m/n/12 inclination# : [] : text = The % 20inclination % 20of % 20exoplanets % 20or ,[] line %
+ []
+
+) [12] (./FinalReport.aux)
 Package rerunfilecheck Info: File `FinalReport.out' has not changed.
-(rerunfilecheck)             Checksum: 9583A4F316ECE75CFCD2B5D07D2F2DEF;2419.
+(rerunfilecheck)             Checksum: 39BC619411C6C4014F489124DE3EA379;2359.
  ) 
 Here is how much of TeX's memory you used:
- 14503 strings out of 478994
- 218578 string characters out of 5858185
- 703933 words of memory out of 5000000
- 31706 multiletter control sequences out of 15000+600000
+ 14602 strings out of 478994
+ 220109 string characters out of 5858185
+ 705185 words of memory out of 5000000
+ 31778 multiletter control sequences out of 15000+600000
  412910 words of font info for 61 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,8n,80p,1137b,1245s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmtt12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on FinalReport.pdf (8 pages, 266809 bytes).
+ 71i,9n,80p,1794b,1247s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmti12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on FinalReport.pdf (13 pages, 655104 bytes).
 PDF statistics:
- 220 PDF objects out of 1000 (max. 8388607)
- 191 compressed objects within 2 object streams
- 48 named destinations out of 1000 (max. 500000)
- 171 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 305 PDF objects out of 1000 (max. 8388607)
+ 265 compressed objects within 3 object streams
+ 69 named destinations out of 1000 (max. 500000)
+ 173 words of extra memory for PDF output out of 10000 (max. 10000000)
 
